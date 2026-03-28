@@ -23,7 +23,7 @@ const data = {
   ],
 
   // 사진 경로 (public 폴더의 profile.jpg)
-  photo: "./profile.jpg",
+  photo: "./민서증명사진.jpg",
 
   keywords: [
     "성실함",
