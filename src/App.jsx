@@ -22,7 +22,8 @@ const data = {
     { name: "OPIc IM2", org: "ACTFL", date: "2023.08" },
   ],
 
-  photo: "./민서증명사진.jpg",
+  // 사진 경로 (public 폴더의 profile.jpg)
+  photo: "./profile.jpg",
 
   keywords: [
     "성실함",
@@ -69,9 +70,9 @@ const data = {
     {
       title: "Wakey Wakey",
       period: "2024.03 — 2024.06",
-      desc: "팀 협업을 위한 실시간 태스크 관리 웹앱.",
+      desc: "팀 협업을 위한 실시간 태스크 관리 웹앱. 드래그앤드롭 칸반 보드와 Socket.io 기반 실시간 알림 기능을 구현했습니다.",
       details:
-        "Socket.io를 활용하여 팀원 간 실시간 알림 시스템을 구축했습니다. 드래그 앤 드롭 방식의 칸반 보드를 통해 업무 진행 상황을 직관적으로 관리할 수 있도록 설계했습니다.",
+        "Socket.io를 활용하여 팀원 간 실시간 알림 시스템을 구축했습니다. 드래그 앤 드롭 방식의 칸반 보드를 통해 업무 진행 상황을 직관적으로 관리할 수 있도록 설계했습니다. 또한, MongoDB를 사용하여 데이터 효율성을 높였습니다.",
       tags: ["React", "Socket.io", "Node.js", "MongoDB"],
       link: "https://github.com",
       demo: "https://taskflow.vercel.app",
@@ -79,7 +80,7 @@ const data = {
     {
       title: "날씨 정보 시각화 서비스",
       period: "2023.09 — 2023.11",
-      desc: "OpenWeather API를 활용한 실시간 날씨 앱.",
+      desc: "OpenWeather API를 활용한 날씨 앱. 위치 기반 날씨 정보와 7일 예보를 시각화했습니다.",
       details:
         "Chart.js를 사용하여 시간에 따른 기온 변화와 습도를 그래프로 시각화했습니다. 사용자의 현재 위치를 자동으로 파악하여 데이터를 대시보드 형태로 제공합니다.",
       tags: ["React", "Chart.js", "OpenAPI", "CSS Modules"],
@@ -87,9 +88,9 @@ const data = {
       demo: null,
     },
     {
-      title: "다우기술 기업 연계형 프리캡스톤",
+      title: "다우기술 기업 연계형 프리캡스톤 디자인",
       period: "2023.03 — 2023.06",
-      desc: "마크다운 기반 PDF 제작 서비스.",
+      desc: "마크다운 기반 PDF 제작 서비스. 커스텀 에디터와 SSG 기반 정적 생성 최적화를 설계했습니다.",
       details:
         "Next.js의 SSG 방식을 적용하여 페이지 로딩 속도를 개선했습니다. 사용자가 실시간 프리뷰를 보며 문서를 편집하고 PDF로 추출할 수 있는 기능을 제공합니다.",
       tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
@@ -181,7 +182,7 @@ function Tag({ label }) {
   );
 }
 
-// 모달 컴포넌트
+// 상세 모달
 function ProjectModal({ project, onClose }) {
   if (!project) return null;
   return (
@@ -245,9 +246,51 @@ function ProjectModal({ project, onClose }) {
             paddingTop: "24px",
             marginTop: "16px",
           }}>
-          <p style={{ fontSize: "15px", color: "#475569", lineHeight: "1.8" }}>
+          <p
+            style={{
+              fontSize: "15px",
+              color: "#475569",
+              lineHeight: "1.8",
+              whiteSpace: "pre-wrap",
+            }}>
             {project.details}
           </p>
+        </div>
+        <div style={{ marginTop: "32px", display: "flex", gap: "12px" }}>
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                flex: 1,
+                textAlign: "center",
+                padding: "12px",
+                background: BLUE,
+                color: "#fff",
+                borderRadius: "12px",
+                textDecoration: "none",
+                fontWeight: 700,
+              }}>
+              Live Demo
+            </a>
+          )}
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              flex: 1,
+              textAlign: "center",
+              padding: "12px",
+              background: BLUE_LIGHT,
+              color: BLUE,
+              borderRadius: "12px",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}>
+            Code
+          </a>
         </div>
       </div>
       <style>{` @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } } `}</style>
@@ -287,9 +330,10 @@ function Nav({ active, setActive }) {
           fontSize: 17,
           fontWeight: 700,
           color: NAVY,
+          letterSpacing: "-0.02em",
         }}>
         {data.name}
-        <span style={{ color: BLUE }}>.</span>
+        <span style={{ color: BLUE, marginLeft: 2 }}>.</span>
       </span>
       <div style={{ display: "flex", gap: 2 }}>
         {items.map((item) => (
@@ -310,6 +354,7 @@ function Nav({ active, setActive }) {
               fontSize: 13,
               fontWeight: 500,
               cursor: "pointer",
+              transition: "all 0.18s",
             }}>
             {labels[item]}
           </button>
@@ -319,7 +364,44 @@ function Nav({ active, setActive }) {
   );
 }
 
-// 소개 섹션
+function InfoRow({ icon, label, value, href }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <span
+        style={{
+          fontSize: 13,
+          color: "#94a3b8",
+          minWidth: 16,
+          textAlign: "center",
+        }}>
+        {icon}
+      </span>
+      <span style={{ fontSize: 12, color: "#94a3b8", minWidth: 40 }}>
+        {label}
+      </span>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            fontSize: 14,
+            color: BLUE,
+            fontWeight: 500,
+            textDecoration: "none",
+          }}>
+          {value} ↗
+        </a>
+      ) : (
+        <span style={{ fontSize: 14, color: "#334155", fontWeight: 500 }}>
+          {value}
+        </span>
+      )}
+    </div>
+  );
+}
+
+// 소개 섹션 (Hero)
 function HeroSection() {
   return (
     <section
@@ -330,60 +412,177 @@ function HeroSection() {
         alignItems: "center",
         background: "#fff",
         position: "relative",
+        overflow: "hidden",
         padding: "100px clamp(20px,8vw,120px) 60px",
       }}>
       <div
         style={{
+          position: "absolute",
+          top: -120,
+          right: -120,
+          width: 480,
+          height: 480,
+          borderRadius: "50%",
+          background: BLUE_LIGHT,
+          opacity: 0.5,
+          zIndex: 0,
+        }}
+      />
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          width: "100%",
           display: "flex",
           alignItems: "center",
-          gap: "60px",
+          gap: "clamp(32px,6vw,80px)",
           flexWrap: "wrap",
-          zIndex: 1,
         }}>
-        <div style={{ flex: "1 1 400px" }}>
+        <div style={{ flex: "1 1 340px", minWidth: 0 }}>
           <FadeUp>
             <h1
               style={{
                 fontFamily: "'Syne', sans-serif",
                 fontSize: "clamp(40px,7vw,72px)",
                 fontWeight: 800,
+                lineHeight: 1.05,
+                letterSpacing: "-0.04em",
                 color: NAVY,
+                margin: "0 0 10px",
               }}>
               {data.name}
             </h1>
           </FadeUp>
-          <FadeUp delay={0.1}>
-            <p style={{ color: BLUE, fontWeight: 600, fontSize: "20px" }}>
+          <FadeUp delay={0.08}>
+            <p
+              style={{
+                fontSize: "clamp(16px,2vw,20px)",
+                fontWeight: 500,
+                color: BLUE,
+                margin: "0 0 20px",
+                letterSpacing: "-0.01em",
+              }}>
               {data.tagline}
             </p>
           </FadeUp>
+          <FadeUp delay={0.14}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "#475569",
+                lineHeight: 1.85,
+                margin: "0 0 28px",
+              }}>
+              {data.bio}
+            </p>
+          </FadeUp>
           <FadeUp delay={0.2}>
-            <p style={{ color: "#475569", lineHeight: 1.8 }}>{data.bio}</p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 9,
+                padding: "18px 22px",
+                background: BLUE_LIGHT,
+                borderRadius: 14,
+                border: "1px solid #dbeafe",
+              }}>
+              <InfoRow
+                icon="🎂"
+                label="나이"
+                value={`${data.age} (${data.birth})`}
+              />
+              <div style={{ height: 1, background: "#c7d9f9" }} />
+              <InfoRow icon="✉" label="이메일" value={data.email} />
+              <div style={{ height: 1, background: "#c7d9f9" }} />
+              <InfoRow
+                icon="🐙"
+                label="GitHub"
+                value="github.com/mingioes"
+                href={data.github}
+              />
+            </div>
           </FadeUp>
         </div>
-        <FadeUp delay={0.1}>
-          <div
-            style={{
-              width: 200,
-              height: 260,
-              borderRadius: 20,
-              overflow: "hidden",
-              border: `4px solid ${BLUE_LIGHT}`,
-              boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-            }}>
-            <img
-              src={data.photo}
-              alt="Profile"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          </div>
-        </FadeUp>
+        <div
+          style={{
+            flex: "0 0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 20,
+          }}>
+          <FadeUp delay={0.1}>
+            <div
+              style={{
+                width: 200,
+                height: 260,
+                borderRadius: 20,
+                border: `2.5px solid ${BLUE_LIGHT}`,
+                overflow: "hidden",
+                background: BLUE_LIGHT,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: `0 8px 32px ${BLUE}18`,
+                flexShrink: 0,
+              }}>
+              <img
+                src={data.photo}
+                alt="증명사진"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.src =
+                    "https://via.placeholder.com/200x260?text=No+Image";
+                }}
+              />
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.18}>
+            <div style={{ width: 200 }}>
+              <p
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#94a3b8",
+                  margin: "0 0 8px",
+                  textAlign: "center",
+                }}>
+                희망 직무
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 6,
+                  justifyContent: "center",
+                }}>
+                {data.targetRoles.map((r) => (
+                  <span
+                    key={r}
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: "#fff",
+                      background: BLUE,
+                      padding: "5px 11px",
+                      borderRadius: 20,
+                    }}>
+                    {r}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
+        </div>
       </div>
     </section>
   );
 }
 
-// ✅ Skills 섹션 (위로 이동)
+// 스킬 섹션 (위로 이동됨)
 function SkillsSection() {
   return (
     <section
@@ -406,14 +605,16 @@ function SkillsSection() {
                   background: "#fff",
                   border: "1px solid #e2e8f0",
                   borderRadius: 16,
-                  padding: "24px",
+                  padding: "24px 28px",
                 }}>
                 <p
                   style={{
                     fontSize: 11,
                     fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
                     color: BLUE,
-                    marginBottom: "16px",
+                    margin: "0 0 16px",
                   }}>
                   {cat}
                 </p>
@@ -423,9 +624,12 @@ function SkillsSection() {
                       key={skill}
                       style={{
                         fontSize: 13,
+                        fontWeight: 500,
+                        color: NAVY,
                         background: "#f0f4ff",
                         padding: "6px 12px",
                         borderRadius: 8,
+                        border: "1px solid #dbeafe",
                       }}>
                       {skill}
                     </span>
@@ -440,55 +644,257 @@ function SkillsSection() {
   );
 }
 
+// 학력 및 수상 섹션
+function BackgroundSection() {
+  const cardStyle = {
+    background: "#fff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 16,
+    padding: "24px 28px",
+  };
+  const labelStyle = {
+    fontSize: 11,
+    fontWeight: 700,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: BLUE,
+    margin: "0 0 16px",
+  };
+  const rowStyle = (last) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: last ? 0 : 14,
+    paddingBottom: last ? 0 : 14,
+    borderBottom: last ? "none" : "1px solid #f1f5f9",
+  });
+  const badgeStyle = {
+    fontSize: 11,
+    background: BLUE_LIGHT,
+    color: BLUE,
+    padding: "3px 8px",
+    borderRadius: 6,
+    fontWeight: 700,
+    whiteSpace: "nowrap",
+  };
+
+  return (
+    <section
+      id="background"
+      style={{ background: "#fff", padding: "100px clamp(20px,8vw,120px)" }}>
+      <div style={{ maxWidth: 800, margin: "0 auto" }}>
+        <FadeUp>
+          <SectionLabel>Background</SectionLabel>
+        </FadeUp>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 20,
+          }}>
+          <FadeUp delay={0}>
+            <div style={cardStyle}>
+              <p style={labelStyle}>Awards</p>
+              {data.awards.map((a, i) => (
+                <div key={i} style={rowStyle(i === data.awards.length - 1)}>
+                  <div>
+                    <p
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 600,
+                        color: NAVY,
+                        margin: "0 0 2px",
+                      }}>
+                      {a.title}
+                    </p>
+                    <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>
+                      {a.org}
+                    </p>
+                  </div>
+                  <span style={badgeStyle}>{a.year}</span>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <div style={cardStyle}>
+              <p style={labelStyle}>Certifications</p>
+              {data.certifications.map((c, i) => (
+                <div
+                  key={i}
+                  style={rowStyle(i === data.certifications.length - 1)}>
+                  <div>
+                    <p
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 600,
+                        color: NAVY,
+                        margin: "0 0 2px",
+                      }}>
+                      {c.name}
+                    </p>
+                    <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>
+                      {c.org}
+                    </p>
+                  </div>
+                  <span style={badgeStyle}>{c.date}</span>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.2}>
+            <div style={cardStyle}>
+              <p style={labelStyle}>Education</p>
+              {data.education.map((ed, i) => (
+                <div key={i}>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      fontWeight: 700,
+                      color: NAVY,
+                      margin: "0 0 4px",
+                    }}>
+                    {ed.school}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "#64748b",
+                      margin: "0 0 4px",
+                    }}>
+                    {ed.period}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12,
+                      color: BLUE,
+                      fontWeight: 600,
+                      margin: 0,
+                    }}>
+                    {ed.note}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 프로젝트 카드
+function ProjectCard({ p, index, onOpen }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <FadeUp delay={index * 0.1}>
+      <div
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        onClick={() => onOpen(p)}
+        style={{
+          background: "#fff",
+          border: `1.5px solid ${hov ? BLUE_MID : "#e2e8f0"}`,
+          borderRadius: 18,
+          padding: "28px 32px",
+          transition: "all 0.25s",
+          boxShadow: hov ? `0 8px 32px ${BLUE}18` : "none",
+          cursor: "pointer",
+        }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            marginBottom: 14,
+          }}>
+          <div>
+            <span
+              style={{
+                fontSize: 11,
+                fontFamily: "'DM Mono', monospace",
+                color: "#94a3b8",
+              }}>
+              {p.period}
+            </span>
+            <h3
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                fontSize: 20,
+                fontWeight: 800,
+                color: NAVY,
+                margin: "6px 0 0",
+              }}>
+              {p.title}
+            </h3>
+          </div>
+          <span style={{ fontSize: 12, color: BLUE, fontWeight: 700 }}>
+            자세히 보기 →
+          </span>
+        </div>
+        <p
+          style={{
+            fontSize: 14,
+            color: "#475569",
+            lineHeight: 1.8,
+            margin: "0 0 18px",
+          }}>
+          {p.desc}
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+          {p.tags.map((t) => (
+            <Tag key={t} label={t} />
+          ))}
+        </div>
+      </div>
+    </FadeUp>
+  );
+}
+
 // 메인 포트폴리오
 export default function Portfolio() {
   const [active, setActive] = useState("about");
   const [selectedProject, setSelectedProject] = useState(null);
 
+  useEffect(() => {
+    const sections = ["about", "skills", "background", "projects"];
+    const obs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        }),
+      { threshold: 0.3 },
+    );
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <div style={{ fontFamily: "'DM Sans', 'Pretendard', sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "'DM Sans', 'Pretendard', sans-serif",
+        background: "#fff",
+        minHeight: "100vh",
+        color: "#1e293b",
+      }}>
       <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap"
         rel="stylesheet"
       />
       <Nav active={active} setActive={setActive} />
 
       <HeroSection />
 
-      {/* 순서 변경됨: Skills가 위로! */}
+      {/* 1. Skills (위로 이동) */}
       <SkillsSection />
 
-      {/* 학력/수상 섹션 */}
-      <section
-        id="background"
-        style={{ padding: "100px clamp(20px,8vw,120px)" }}>
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <FadeUp>
-            <SectionLabel>Background</SectionLabel>
-          </FadeUp>
-          <div
-            style={{
-              background: "#fff",
-              border: "1px solid #e2e8f0",
-              borderRadius: 16,
-              padding: "30px",
-            }}>
-            <h3 style={{ color: BLUE, fontSize: "14px", marginBottom: "20px" }}>
-              Education
-            </h3>
-            {data.education.map((ed, i) => (
-              <div key={i}>
-                <p style={{ fontWeight: 700, color: NAVY }}>{ed.school}</p>
-                <p style={{ fontSize: "13px", color: "#64748b" }}>
-                  {ed.period} | {ed.note}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 2. Background (학력/수상) */}
+      <BackgroundSection />
 
-      {/* 프로젝트 섹션 */}
+      {/* 3. Projects */}
       <section
         id="projects"
         style={{
@@ -501,24 +907,12 @@ export default function Portfolio() {
           </FadeUp>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             {data.projects.map((p, i) => (
-              <div
-                key={i}
-                onClick={() => setSelectedProject(p)}
-                style={{
-                  background: "#fff",
-                  padding: "30px",
-                  borderRadius: 18,
-                  border: "1px solid #e2e8f0",
-                  cursor: "pointer",
-                }}>
-                <h3 style={{ color: NAVY }}>
-                  {p.title}{" "}
-                  <span style={{ fontSize: "12px", color: BLUE }}>
-                    자세히 보기 →
-                  </span>
-                </h3>
-                <p style={{ fontSize: "14px", color: "#475569" }}>{p.desc}</p>
-              </div>
+              <ProjectCard
+                key={p.title}
+                p={p}
+                index={i}
+                onOpen={setSelectedProject}
+              />
             ))}
           </div>
         </div>
@@ -532,11 +926,16 @@ export default function Portfolio() {
       <footer
         style={{
           background: NAVY,
-          color: "#fff",
+          color: "#94a3b8",
           textAlign: "center",
-          padding: "40px",
+          padding: "32px 20px",
+          fontSize: 13,
         }}>
-        <p>© 2025 {data.name}. All rights reserved.</p>
+        <p style={{ margin: 0 }}>
+          © 2025{" "}
+          <span style={{ color: "#fff", fontWeight: 600 }}>{data.name}</span> ·
+          Built with React
+        </p>
       </footer>
     </div>
   );
