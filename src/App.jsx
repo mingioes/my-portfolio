@@ -22,7 +22,7 @@ const data = {
     { name: "OPIc IM2", org: "ACTFL", date: "2023.08" },
   ],
 
-  photo: "/민서증명사진.jpg", // 증명사진 URL을 여기에 넣으세요. 예: "/photo.jpg"
+  photo: "my-portfolio/public/민서증명사진.jpg", // 증명사진 URL을 여기에 넣으세요. 예: "/photo.jpg"
 
   keywords: [
     "성실함",
