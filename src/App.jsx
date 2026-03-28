@@ -5,6 +5,7 @@ const BLUE_LIGHT = "#e8f0fe";
 const BLUE_MID = "#3b82f6";
 const NAVY = "#0f2a6e";
 
+// 1. 프로젝트 데이터에 상세 내용(details)을 추가했습니다.
 const data = {
   name: "강민서",
   age: "23세",
@@ -22,7 +23,7 @@ const data = {
     { name: "OPIc IM2", org: "ACTFL", date: "2023.08" },
   ],
 
-  photo: "my-portfolio/public/민서증명사진.jpg", // 증명사진 URL을 여기에 넣으세요. 예: "/photo.jpg"
+  photo: "/minseo.jpg",
 
   keywords: [
     "성실함",
@@ -31,25 +32,32 @@ const data = {
     "꼼꼼한 코드 리뷰",
     "문제 해결",
   ],
-
   targetRoles: ["Frontend Developer", "Web Developer", "React Developer"],
 
   education: [
     {
-      school: "한국대학교 컴퓨터공학과",
-      period: "2020 — 2025",
-      note: "졸업 예정 · GPA 4.1 / 4.5",
+      school: "한성대학교 컴퓨터공학부 모바일소프트웨어/웹공학트랙",
+      period: "2022.03 입학 — 2026.02 졸업",
+      note: "졸업 · 학점 3.6 / 4.5",
     },
   ],
 
   awards: [
-    { title: "교내 해커톤 최우수상", org: "한국대학교", year: "2024" },
+    {
+      title: "2025 컴퓨터공학부 기업연계형 캡스톤디자인 최우수상",
+      org: "한성대학교",
+      year: "2025.05",
+    },
     {
       title: "K-디지털 챌린지 본선 진출",
       org: "과학기술정보통신부",
       year: "2023",
     },
-    { title: "SW 캡스톤 우수상", org: "컴퓨터공학과", year: "2023" },
+    {
+      title: "2025 한국통신학회 추계학술대회 학부생 캡스톤디자인 경진대회",
+      org: "한국통신학회",
+      year: "2025.11",
+    },
   ],
 
   skills: {
@@ -60,25 +68,31 @@ const data = {
 
   projects: [
     {
-      title: "TaskFlow",
+      title: "Wakey Wakey",
       period: "2024.03 — 2024.06",
-      desc: "팀 협업을 위한 실시간 태스크 관리 웹앱. 드래그앤드롭 칸반 보드와 Socket.io 기반 실시간 알림 기능을 구현했습니다.",
+      desc: "팀 협업을 위한 실시간 태스크 관리 웹앱.",
+      details:
+        "Socket.io를 활용하여 팀원 간 실시간 알림 시스템을 구축했습니다. 드래그 앤 드롭 방식의 칸반 보드를 통해 업무 진행 상황을 직관적으로 관리할 수 있도록 설계했습니다. 또한, MongoDB를 사용하여 대규모 메시지 데이터를 효율적으로 처리했습니다.",
       tags: ["React", "Socket.io", "Node.js", "MongoDB"],
       link: "https://github.com",
       demo: "https://taskflow.vercel.app",
     },
     {
-      title: "WeatherNow",
+      title: "날씨 정보 시각화 서비스",
       period: "2023.09 — 2023.11",
-      desc: "OpenWeather API를 활용한 날씨 앱. 위치 기반 날씨 정보와 7일 예보, 대기질 지수를 Chart.js로 시각화했습니다.",
+      desc: "OpenWeather API를 활용한 실시간 날씨 앱.",
+      details:
+        "Chart.js를 사용하여 시간에 따른 기온 변화와 습도를 그래프로 시각화했습니다. Geolocation API를 통해 사용자의 현재 위치를 자동으로 파악하고, 미세먼지 지수 등 환경 데이터를 대시보드 형태로 제공합니다.",
       tags: ["React", "Chart.js", "OpenAPI", "CSS Modules"],
       link: "https://github.com",
       demo: null,
     },
     {
-      title: "DevLog",
+      title: "다우기술 기업 연계형 프리캡스톤",
       period: "2023.03 — 2023.06",
-      desc: "마크다운 기반 개발 블로그 플랫폼. 커스텀 에디터와 태그 검색, SSG 기반 정적 생성 최적화를 직접 설계했습니다.",
+      desc: "마크다운 기반 PDF 제작 및 블로그 플랫폼.",
+      details:
+        "Next.js의 SSG(Static Site Generation) 방식을 적용하여 페이지 로딩 속도를 40% 개선했습니다. 커스텀 마크다운 에디터를 직접 구현하여 사용자가 실시간 프리뷰를 보며 문서를 편집하고 PDF로 추출할 수 있는 기능을 제공합니다.",
       tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
       link: "https://github.com",
       demo: "https://devlog.vercel.app",
@@ -86,6 +100,7 @@ const data = {
   ],
 };
 
+// --- 공통 컴포넌트 (useInView, FadeUp 등은 기존과 동일) ---
 function useInView(threshold = 0.12) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -167,6 +182,202 @@ function Tag({ label }) {
   );
 }
 
+// 2. 모달 컴포넌트 추가
+function ProjectModal({ project, onClose }) {
+  if (!project) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(15, 42, 110, 0.4)",
+        backdropFilter: "blur(8px)",
+        zIndex: 1000,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+      }}
+      onClick={onClose}>
+      <div
+        style={{
+          backgroundColor: "#fff",
+          width: "100%",
+          maxWidth: "600px",
+          borderRadius: "24px",
+          padding: "40px",
+          position: "relative",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.2)",
+          animation: "modalSlideUp 0.3s ease-out",
+        }}
+        onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            border: "none",
+            background: "none",
+            fontSize: "24px",
+            cursor: "pointer",
+            color: "#94a3b8",
+          }}>
+          ✕
+        </button>
+
+        <span style={{ fontSize: "12px", color: BLUE, fontWeight: 700 }}>
+          PROJECT DETAIL
+        </span>
+        <h2
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontSize: "28px",
+            color: NAVY,
+            marginTop: "8px",
+          }}>
+          {project.title}
+        </h2>
+        <p style={{ fontSize: "14px", color: "#64748b", marginBottom: "24px" }}>
+          {project.period}
+        </p>
+
+        <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: "24px" }}>
+          <h4 style={{ fontSize: "16px", color: NAVY, marginBottom: "12px" }}>
+            주요 기능 및 성과
+          </h4>
+          <p
+            style={{
+              fontSize: "15px",
+              color: "#475569",
+              lineHeight: "1.8",
+              whiteSpace: "pre-wrap",
+            }}>
+            {project.details}
+          </p>
+        </div>
+
+        <div style={{ marginTop: "32px", display: "flex", gap: "12px" }}>
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                flex: 1,
+                textAlign: "center",
+                padding: "12px",
+                background: BLUE,
+                color: "#fff",
+                borderRadius: "12px",
+                textDecoration: "none",
+                fontWeight: 700,
+              }}>
+              Live Demo ↗
+            </a>
+          )}
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              flex: 1,
+              textAlign: "center",
+              padding: "12px",
+              background: BLUE_LIGHT,
+              color: BLUE,
+              borderRadius: "12px",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}>
+            GitHub Code ↗
+          </a>
+        </div>
+      </div>
+      <style>{`
+        @keyframes modalSlideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// 3. ProjectCard 수정 (클릭 이벤트 추가)
+function ProjectCard({ p, index, onOpen }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <FadeUp delay={index * 0.1}>
+      <div
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        onClick={() => onOpen(p)} // 카드 클릭 시 모달 열기
+        style={{
+          background: "#fff",
+          border: `1.5px solid ${hov ? BLUE_MID : "#e2e8f0"}`,
+          borderRadius: 18,
+          padding: "28px 32px",
+          transition: "border-color 0.25s, box-shadow 0.25s",
+          boxShadow: hov ? `0 8px 32px ${BLUE}18` : "none",
+          cursor: "pointer", // 마우스 커서를 손가락 모양으로
+        }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            marginBottom: 14,
+          }}>
+          <div>
+            <span
+              style={{
+                fontSize: 11,
+                fontFamily: "'DM Mono', monospace",
+                color: "#94a3b8",
+              }}>
+              {p.period}
+            </span>
+            <h3
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                fontSize: 20,
+                fontWeight: 800,
+                color: NAVY,
+                margin: "6px 0 0",
+                letterSpacing: "-0.02em",
+              }}>
+              {p.title}
+            </h3>
+          </div>
+          <div style={{ fontSize: "12px", color: BLUE, fontWeight: 700 }}>
+            자세히 보기 →
+          </div>
+        </div>
+        <p
+          style={{
+            fontSize: 14,
+            color: "#475569",
+            lineHeight: 1.8,
+            margin: "0 0 18px",
+          }}>
+          {p.desc}
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+          {p.tags.map((t) => (
+            <Tag key={t} label={t} />
+          ))}
+        </div>
+      </div>
+    </FadeUp>
+  );
+}
+
+// --- 나머지 섹션(Nav, Hero, Background, Skills)은 기존과 동일하게 유지 ---
 function Nav({ active, setActive }) {
   const items = ["about", "background", "projects", "skills"];
   const labels = {
@@ -297,20 +508,6 @@ function HeroSection() {
       />
       <div
         style={{
-          position: "absolute",
-          bottom: 40,
-          left: -60,
-          width: 220,
-          height: 220,
-          borderRadius: "50%",
-          background: "#dbeafe",
-          opacity: 0.4,
-          zIndex: 0,
-        }}
-      />
-
-      <div
-        style={{
           position: "relative",
           zIndex: 1,
           width: "100%",
@@ -319,7 +516,6 @@ function HeroSection() {
           gap: "clamp(32px,6vw,80px)",
           flexWrap: "wrap",
         }}>
-        {/* 왼쪽: 텍스트 */}
         <div style={{ flex: "1 1 340px", minWidth: 0 }}>
           <FadeUp>
             <h1
@@ -380,14 +576,12 @@ function HeroSection() {
               <InfoRow
                 icon="🐙"
                 label="GitHub"
-                value="github.com/minjun"
+                value="github.com/mingioes"
                 href={data.github}
               />
             </div>
           </FadeUp>
         </div>
-
-        {/* 오른쪽: 사진 + 키워드 + 희망직무 */}
         <div
           style={{
             flex: "0 0 auto",
@@ -397,7 +591,6 @@ function HeroSection() {
             gap: 20,
           }}>
           <FadeUp delay={0.1}>
-            {/* 증명사진 */}
             <div
               style={{
                 width: 200,
@@ -412,38 +605,16 @@ function HeroSection() {
                 boxShadow: `0 8px 32px ${BLUE}18`,
                 flexShrink: 0,
               }}>
-              {data.photo ? (
-                <img
-                  src={data.photo}
-                  alt="증명사진"
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              ) : (
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 40, marginBottom: 8 }}>🧑‍💻</div>
-                  <p
-                    style={{
-                      fontSize: 11,
-                      color: BLUE,
-                      fontWeight: 600,
-                      margin: 0,
-                    }}>
-                    증명사진
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 10,
-                      color: "#94a3b8",
-                      margin: "4px 0 0",
-                    }}>
-                    photo 필드에 URL 입력
-                  </p>
-                </div>
-              )}
+              <img
+                src={data.photo}
+                alt="증명사진"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+              />
             </div>
           </FadeUp>
-
-          {/* 희망 직무 */}
           <FadeUp delay={0.18}>
             <div style={{ width: 200 }}>
               <p
@@ -477,47 +648,6 @@ function HeroSection() {
                       borderRadius: 20,
                     }}>
                     {r}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* 키워드 태그 */}
-          <FadeUp delay={0.24}>
-            <div style={{ width: 200 }}>
-              <p
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#94a3b8",
-                  margin: "0 0 8px",
-                  textAlign: "center",
-                }}>
-                키워드
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 6,
-                  justifyContent: "center",
-                }}>
-                {data.keywords.map((k) => (
-                  <span
-                    key={k}
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 600,
-                      color: BLUE,
-                      background: BLUE_LIGHT,
-                      padding: "5px 11px",
-                      borderRadius: 20,
-                      border: "1px solid #c7d9f9",
-                    }}>
-                    {k}
                   </span>
                 ))}
               </div>
@@ -570,14 +700,12 @@ function BackgroundSection() {
         <FadeUp>
           <SectionLabel>Background</SectionLabel>
         </FadeUp>
-
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: 20,
           }}>
-          {/* 1. 수상 */}
           <FadeUp delay={0}>
             <div style={cardStyle}>
               <p style={labelStyle}>Awards</p>
@@ -602,8 +730,6 @@ function BackgroundSection() {
               ))}
             </div>
           </FadeUp>
-
-          {/* 2. 자격증 */}
           <FadeUp delay={0.1}>
             <div style={cardStyle}>
               <p style={labelStyle}>Certifications</p>
@@ -630,8 +756,6 @@ function BackgroundSection() {
               ))}
             </div>
           </FadeUp>
-
-          {/* 3. 학력 */}
           <FadeUp delay={0.2}>
             <div style={cardStyle}>
               <p style={labelStyle}>Education</p>
@@ -670,103 +794,6 @@ function BackgroundSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ProjectCard({ p, index }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <FadeUp delay={index * 0.1}>
-      <div
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        style={{
-          background: "#fff",
-          border: `1.5px solid ${hov ? BLUE_MID : "#e2e8f0"}`,
-          borderRadius: 18,
-          padding: "28px 32px",
-          transition: "border-color 0.25s, box-shadow 0.25s",
-          boxShadow: hov ? `0 8px 32px ${BLUE}18` : "none",
-        }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            marginBottom: 14,
-          }}>
-          <div>
-            <span
-              style={{
-                fontSize: 11,
-                fontFamily: "'DM Mono', monospace",
-                color: "#94a3b8",
-              }}>
-              {p.period}
-            </span>
-            <h3
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: 20,
-                fontWeight: 800,
-                color: NAVY,
-                margin: "6px 0 0",
-                letterSpacing: "-0.02em",
-              }}>
-              {p.title}
-            </h3>
-          </div>
-          <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
-            {p.demo && (
-              <a
-                href={p.demo}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: "#fff",
-                  background: BLUE,
-                  padding: "6px 14px",
-                  borderRadius: 8,
-                  textDecoration: "none",
-                }}>
-                Live ↗
-              </a>
-            )}
-            <a
-              href={p.link}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: BLUE,
-                background: BLUE_LIGHT,
-                padding: "6px 14px",
-                borderRadius: 8,
-                textDecoration: "none",
-              }}>
-              Code
-            </a>
-          </div>
-        </div>
-        <p
-          style={{
-            fontSize: 14,
-            color: "#475569",
-            lineHeight: 1.8,
-            margin: "0 0 18px",
-          }}>
-          {p.desc}
-        </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-          {p.tags.map((t) => (
-            <Tag key={t} label={t} />
-          ))}
-        </div>
-      </div>
-    </FadeUp>
   );
 }
 
@@ -826,61 +853,15 @@ function SkillsSection() {
             </FadeUp>
           ))}
         </div>
-
-        <FadeUp delay={0.2}>
-          <div
-            style={{
-              marginTop: 48,
-              background: `linear-gradient(135deg, ${NAVY} 0%, ${BLUE} 100%)`,
-              borderRadius: 20,
-              padding: "40px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: 24,
-            }}>
-            <div>
-              <p
-                style={{
-                  fontFamily: "'Syne', sans-serif",
-                  fontSize: 22,
-                  fontWeight: 800,
-                  color: "#fff",
-                  margin: "0 0 8px",
-                }}>
-                함께 일하고 싶으신가요?
-              </p>
-              <p style={{ fontSize: 14, color: "#bfdbfe", margin: 0 }}>
-                현재 신입 포지션을 적극 지원 중입니다.
-              </p>
-            </div>
-            <a
-              href={`mailto:${data.email}`}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#fff",
-                color: BLUE,
-                padding: "13px 28px",
-                borderRadius: 10,
-                fontSize: 14,
-                fontWeight: 700,
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-              }}>
-              연락하기 →
-            </a>
-          </div>
-        </FadeUp>
       </div>
     </section>
   );
 }
 
+// 4. 메인 컴포넌트 (모달 상태 관리)
 export default function Portfolio() {
   const [active, setActive] = useState("about");
+  const [selectedProject, setSelectedProject] = useState(null); // 현재 선택된 프로젝트 상태
 
   useEffect(() => {
     const sections = ["about", "background", "projects", "skills"];
@@ -910,9 +891,11 @@ export default function Portfolio() {
         href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap"
         rel="stylesheet"
       />
+
       <Nav active={active} setActive={setActive} />
       <HeroSection />
       <BackgroundSection />
+
       <section
         id="projects"
         style={{ background: "#fff", padding: "100px clamp(20px,8vw,120px)" }}>
@@ -922,12 +905,25 @@ export default function Portfolio() {
           </FadeUp>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             {data.projects.map((p, i) => (
-              <ProjectCard key={p.title} p={p} index={i} />
+              <ProjectCard
+                key={p.title}
+                p={p}
+                index={i}
+                onOpen={setSelectedProject}
+              />
             ))}
           </div>
         </div>
       </section>
+
       <SkillsSection />
+
+      {/* 모달 렌더링 */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
       <footer
         style={{
           background: NAVY,
