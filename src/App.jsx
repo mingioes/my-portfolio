@@ -1,44 +1,50 @@
 import { useState, useEffect, useRef } from "react";
 
-/* ── 색상 팔레트 (Google 3색: 파랑·빨강·노랑 + 하늘색 보조) ── */
+/* ── 색상 팔레트 ── */
 const C = {
-  bg: "#f8f9fa", // Google 홈 배경
+  bg: "#f8f9fa",
   surface: "#ffffff",
-  navy: "#202124", // Google dark text
-  blue: "#1a73e8", // Google Blue (주)
-  blueLight: "#e8f0fe", // Google Blue light
-  blueMid: "#4285f4", // Google Blue mid
-  sky: "#00b4d8", // 하늘색 (초록 대체)
-  skyLight: "#e0f7fa", // 하늘색 light
-  red: "#ea4335", // Google Red (강조 포인트)
-  redLight: "#fce8e6", // Google Red light
-  yellow: "#fbbc04", // Google Yellow (배지/태그)
-  yellowLight: "#fef9e7", // Google Yellow light
+  navy: "#202124",
+  blue: "#1a73e8",
+  blueLight: "#e8f0fe",
+  blueMid: "#4285f4",
+  sky: "#00b4d8",
+  skyLight: "#e0f7fa",
+  red: "#ea4335",
+  redLight: "#fce8e6",
+  yellow: "#fbbc04",
+  yellowLight: "#fef9e7",
   muted: "#5f6368",
   border: "#dadce0",
-  headerBg: "#1a1a2e", // 딥 네이비
+  headerBg: "#1a73e8",
+  headerBgSoft: "#5aa9ff",
+  headerGlass: "rgba(255,255,255,0.16)",
+  blueStrong: "#0b57d0",
+  blueSoft: "rgba(37,99,235,0.08)",
+  blueSoftMid: "rgba(37,99,235,0.14)",
+  blueLine: "rgba(37,99,235,0.22)",
+  textSoft: "#475569",
 };
 
 /* ── 데이터 ── */
 const data = {
   name: "강민서",
-  greeting: "안녕하세요, 백엔드 개발자",
+  greeting: "백엔드 개발자",
   role: "Backend Developer",
   age: "23세",
   birth: "2004.01.15",
-  bio: "복잡한 문제를 단순하고 직관적인 인터페이스로 풀어내는 것을 좋아합니다. 협업을 중요하게 생각하며, 코드 품질과 사용성 모두를 챙기는 개발자를 지향합니다.",
-  photo: "./민서증명사진.jpg",
+  photo: "./IMG_2124.jpg",
 
   contact: {
-    email: "vhehddl2212@naver.com",
-    phone: "010-9625-2212",
+    email: "111111@naver.com",
+    phone: "010-1111-1111",
     github: "github.com/mingioes",
-    githubUrl: "https://github.com/mingioes",
+    githubUrl: "https://github.com/",
   },
 
   education: [
     {
-      school: "한성대학교 컴퓨터공학부",
+      school: "한국대학교 컴퓨터공학부",
       track: "모바일소프트웨어/웹공학 트랙",
       period: "2022.03 ~ 2026.02",
       note: "졸업 · 학점 3.6 / 4.5",
@@ -61,12 +67,20 @@ const data = {
       org: "한성대학교",
       date: "2025.9",
     },
+    {
+      title: "AI/SW 창업프로젝트",
+      org: "한성대학교",
+      date: "2025.9",
+    },
   ],
 
   certifications: [
     { name: "리눅스마스터 2급", org: "한국산업인력공단", date: "2024.06" },
     { name: "SQLD", org: "한국데이터산업진흥원", date: "2023.12" },
-    { name: "OPIc IM2", org: "ACTFL", date: "2023.08" },
+    { name: "정보처리기능사", org: "한국산업인력관리공단", date: "2023.08" },
+    { name: "TRIZ level 1", org: "한국트리즈협회", date: "2023.08" },
+    { name: "Toeic Speaking(진)", org: "ETS", date: "2023.08" },
+    { name: "정보처리기사(진)", org: "한국산업인력관리공단", date: "2023.08" },
   ],
 
   skills: {
@@ -81,13 +95,13 @@ const data = {
       "AWS S3",
       "Linux",
       "Figma",
-      "InteliJ",
+      "IntelliJ",
     ],
   },
 
   projects: [
     {
-      title: "Wakey Wakey (with Qualcomm)",
+      title: "1. Wakey Wakey (with Qualcomm)",
       subtitle:
         "Qualcomm AI Hub의 Snapdragon 8 Gen 3 NPU 기반 On-Device AI 인생발자취 및 스마트 앨범 서비스",
       role: "Backend & AI Model Integration",
@@ -101,7 +115,7 @@ const data = {
         "ESRGAN 모델 활용 저화질 이미지 업스케일링 파이프라인 구축",
       ],
       details: [
-        "Qualcomm 본사 엔지니어들과 실시간 영어 슬랙 채널로 소통하며, 모델 변환 과정의 트러블슈팅과 SDK 호환성 문제를 직접 해결했습니다.", // 구체적 사례
+        "Qualcomm 본사 엔지니어들과 실시간 영어 슬랙 채널로 소통하며, 모델 변환 과정의 트러블슈팅과 SDK 호환성 문제를 직접 해결했습니다.",
         "Snapdragon 8 Gen 3 NPU를 활용하여 서버 없이 기기 내에서 실시간 객체 탐지 및 자연어 검색이 가능하도록 성능을 최적화했습니다.",
         "인터넷 연결이 제한된 환경에서도 프라이버시를 보장하며 작동하는 검색 엔진을 구현했습니다.",
         "이러한 기술적 도전과 글로벌 협업 성과를 인정받아 기업연계형 캡스톤 디자인 최우수상을 수상했습니다.",
@@ -119,14 +133,14 @@ const data = {
       demo: "https://youtu.be/GG55KUtXJIg?si=G75WDKJ1eZXje_tv",
     },
     {
-      title: "WorkHub",
-      subtitle: "Notion 데이터 기반 업무 자동 요약 및 협업 관리 시스템", // LLM 제거 및 직관적 수정
+      title: "2. WorkHub",
+      subtitle: "Notion 데이터 기반 업무 자동 요약 및 협업 관리 시스템",
       role: "Backend Developer (Solo Project)",
       period: "2026.01 ~ Present",
       overview:
         "방대한 Notion 기록을 Google Gemini API를 통해 핵심 요약하여 업무 생산성을 극대화하는 서비스입니다. Spring Boot 3.4와 Java 21을 기반으로 보안성과 확장성을 갖춘 백엔드 아키텍처를 설계하고 있습니다.",
       responsibilities: [
-        "Google Gemini API 연동을 통한 실시간 문서 요약 및 텍스트 데이터 정제 로직 구현", // Gemini로 변경
+        "Google Gemini API 연동을 통한 실시간 문서 요약 및 텍스트 데이터 정제 로직 구현",
         "Spring Boot 3.4 및 Java 21 최신 기능을 활용한 견고한 백엔드 시스템 구축",
         "Spring Security 및 JWT를 도입한 무상태(Stateless) 인증 체계 및 데이터 보안 강화",
         "Docker 기반의 MySQL 인프라 환경 구축 및 JPA를 이용한 효율적인 데이터 모델링",
@@ -145,13 +159,13 @@ const data = {
         "JPA",
         "MySQL",
         "Docker",
-      ], // 태그 업데이트
+      ],
       github: "https://github.com/mingioes/workhub",
       demo: null,
     },
     {
-      title: "다우기술 기업연계형 프리캡스톤",
-      subtitle: "뿌리오(Ppurio) 서비스 연계 마케팅 이미지 자동 생성 솔루션", // 기업 서비스 강조
+      title: "3. 다우기술 기업연계형 프리캡스톤",
+      subtitle: "뿌리오(Ppurio) 서비스 연계 마케팅 이미지 자동 생성 솔루션",
       role: "AI Image Engine & Backend Logic Design",
       period: "2024.03 ~ 2024.06",
       overview:
@@ -174,7 +188,7 @@ const data = {
         "Prompt Engineering",
         "Image Processing",
         "Express",
-      ], // 도구 이름보다 기술 개념 위주로 태그
+      ],
       github: "https://github.com/mingioes",
       demo: null,
     },
@@ -214,7 +228,6 @@ function FadeUp({ children, delay = 0, style = {} }) {
   );
 }
 
-/* ── 섹션 타이틀 ── */
 function SectionTitle({ icon, children, color }) {
   return (
     <div
@@ -222,12 +235,12 @@ function SectionTitle({ icon, children, color }) {
         display: "flex",
         alignItems: "center",
         gap: 10,
-        marginBottom: 20,
+        marginBottom: 14,
       }}>
-      <span style={{ fontSize: 20 }}>{icon}</span>
+      <span style={{ fontSize: 18 }}>{icon}</span>
       <h2
         style={{
-          fontSize: 18,
+          fontSize: 19,
           fontWeight: 700,
           color: color || C.navy,
           margin: 0,
@@ -274,7 +287,7 @@ function Nav() {
           color: scrolled ? C.navy : "#fff",
         }}>
         {data.name}
-        <span style={{ color: C.sky }}>.</span>
+        <span style={{ color: C.yellow }}>.</span>
       </span>
       <div style={{ display: "flex", gap: 4 }}>
         {[
@@ -286,9 +299,9 @@ function Nav() {
             key={href}
             href={href}
             style={{
-              fontSize: 13,
-              fontWeight: 500,
-              padding: "5px 12px",
+              fontSize: 15,
+              fontWeight: 600,
+              padding: "6px 14px",
               borderRadius: 6,
               color: scrolled ? C.muted : "rgba(255,255,255,0.85)",
               textDecoration: "none",
@@ -315,24 +328,11 @@ function Header() {
   return (
     <header
       style={{
-        background: C.headerBg,
-        padding: "88px clamp(16px,6vw,80px) 120px",
+        background: `linear-gradient(135deg, ${C.headerBg} 0%, ${C.headerBgSoft} 48%, #8fd0ff 78%, #ffffff 100%)`,
+        padding: "74px clamp(20px,4vw,60px) 30px",
         position: "relative",
       }}>
-      {/* 구글 4색 상단 바 */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 4,
-          background:
-            "linear-gradient(90deg, #4285f4 0%, #4285f4 25%, #ea4335 25%, #ea4335 50%, #fbbc04 50%, #fbbc04 75%, #00b4d8 75%, #00b4d8 100%)",
-        }}
-      />
-
-      {/* 배경 장식 — 클립 컨테이너 */}
+      {/* 배경 장식 */}
       <div
         style={{
           position: "absolute",
@@ -345,10 +345,10 @@ function Header() {
             position: "absolute",
             top: -100,
             right: -100,
-            width: 380,
-            height: 380,
+            width: 400,
+            height: 400,
             borderRadius: "50%",
-            background: "rgba(66,133,244,0.12)",
+            background: C.headerGlass,
           }}
         />
         <div
@@ -356,51 +356,56 @@ function Header() {
             position: "absolute",
             bottom: -60,
             left: "20%",
-            width: 220,
-            height: 220,
+            width: 240,
+            height: 240,
             borderRadius: "50%",
-            background: "rgba(234,67,53,0.08)",
+            background: "rgba(255,255,255,0.10)",
           }}
         />
         <div
           style={{
             position: "absolute",
-            top: "30%",
-            right: "15%",
-            width: 120,
-            height: 120,
+            top: "35%",
+            right: "12%",
+            width: 130,
+            height: 130,
             borderRadius: "50%",
-            background: "rgba(251,188,4,0.10)",
+            background: "rgba(255,255,255,0.16)",
           }}
         />
       </div>
 
-      <div style={{ position: "relative", zIndex: 1 }}>
-        {/* 노트북 아이콘 */}
-        <div style={{ fontSize: 38, marginBottom: 20 }}>💻</div>
-
-        {/* 메인 타이틀 */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 1140,
+          margin: "0 auto",
+          paddingLeft: 8,
+        }}>
+        <div style={{ fontSize: 34, marginBottom: 12 }}>💻</div>
         <h1
           style={{
-            fontFamily: "'Noto Sans KR', 'Syne', sans-serif",
-            fontSize: "clamp(26px, 4vw, 44px)",
+            fontFamily: "'Noto Sans KR', sans-serif",
+            fontSize: "clamp(34px, 4.8vw, 56px)",
             fontWeight: 800,
             color: "#ffffff",
-            margin: "0 0 10px",
+            margin: "0 0 8px",
             letterSpacing: "-0.02em",
-            lineHeight: 1.25,
+            lineHeight: 1.2,
           }}>
-          {data.greeting} <span style={{ color: C.yellow }}>{data.name}</span>
-          <span style={{ color: "rgba(255,255,255,0.9)" }}>입니다.</span>
+          <span style={{ color: "rgba(255,255,255,0.96)" }}>
+            {data.greeting}
+          </span>{" "}
+          <span style={{ color: "#0b57d0" }}>{data.name}</span>
+          <span style={{ color: "rgba(255,255,255,0.96)" }}>입니다.</span>
         </h1>
-
-        {/* 역할 배지 */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: 10,
-            marginTop: 14,
+            marginTop: 10,
             flexWrap: "wrap",
           }}>
           <span
@@ -409,9 +414,8 @@ function Header() {
               fontWeight: 700,
               padding: "5px 14px",
               borderRadius: 20,
-              background: C.blue,
+              background: "rgba(255,255,255,0.14)",
               color: "#fff",
-              letterSpacing: "0.02em",
             }}>
             Backend Developer
           </span>
@@ -421,9 +425,9 @@ function Header() {
               fontWeight: 700,
               padding: "5px 14px",
               borderRadius: 20,
-              background: "rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.75)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              background: "rgba(255,255,255,0.08)",
+              color: "rgba(255,255,255,0.8)",
+              border: "1px solid rgba(255,255,255,0.25)",
             }}>
             React · Spring Boot · AWS
           </span>
@@ -439,200 +443,210 @@ function IntroSection() {
     background: C.surface,
     border: `1px solid ${C.border}`,
     borderRadius: 12,
-    padding: "20px 24px",
+    padding: "14px 18px",
+    minWidth: 0,
   };
+
   const row = {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    paddingBottom: 12,
-    marginBottom: 12,
+    gap: 10,
+    paddingBottom: 8,
+    marginBottom: 8,
     borderBottom: `1px solid #f3f4f6`,
   };
-  const badgeBlue = {
-    fontSize: 11,
-    fontWeight: 700,
-    background: C.blueLight,
-    color: C.blue,
-    padding: "3px 8px",
-    borderRadius: 6,
-    whiteSpace: "nowrap",
-  };
+
   const badgeRed = {
     fontSize: 11,
     fontWeight: 700,
     background: C.redLight,
     color: C.red,
-    padding: "3px 8px",
-    borderRadius: 6,
+    padding: "4px 10px",
+    borderRadius: 8,
     whiteSpace: "nowrap",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    lineHeight: 1,
+    alignSelf: "flex-start",
+    flexShrink: 0,
+    minWidth: 62,
+    height: 24,
+    boxSizing: "border-box",
   };
+
   const badgeYellow = {
     fontSize: 11,
     fontWeight: 700,
     background: C.yellowLight,
     color: "#92400e",
-    padding: "3px 8px",
-    borderRadius: 6,
+    padding: "4px 10px",
+    borderRadius: 8,
     whiteSpace: "nowrap",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    lineHeight: 1,
+    alignSelf: "flex-start",
+    flexShrink: 0,
+    minWidth: 62,
+    height: 24,
+    boxSizing: "border-box",
   };
 
   return (
     <section
       id="intro"
-      style={{ background: C.bg, padding: "0 clamp(16px,6vw,80px) 48px" }}>
+      style={{ background: C.bg, padding: "20px clamp(18px,3.6vw,54px) 8px" }}>
       <div
         style={{
-          maxWidth: 1100,
+          maxWidth: 1180,
           margin: "0 auto",
-          display: "flex",
-          gap: 32,
-          flexWrap: "wrap",
-          alignItems: "flex-start",
+          display: "grid",
+          gridTemplateColumns: "1.02fr 0.86fr 230px",
+          gridTemplateRows: "auto auto",
+          gap: 18,
+          alignItems: "start",
+          justifyContent: "center",
         }}>
-        {/* 왼쪽: 학력/수상/자격증 */}
-        <div
-          style={{
-            flex: "1 1 560px",
-            minWidth: 0,
-            display: "flex",
-            flexDirection: "column",
-            gap: 24,
-            paddingTop: 48,
-          }}>
-          <FadeUp>
-            <div style={card}>
-              <SectionTitle icon="🎓" color={C.blue}>
-                학력
-              </SectionTitle>
-              {data.education.map((ed, i) => (
-                <div key={i}>
+        {/* 왼쪽 상단: 학력 */}
+        <FadeUp style={{ gridColumn: "1 / 2", gridRow: "1 / 2" }}>
+          <div style={card}>
+            <SectionTitle icon="🎓" color={C.blue}>
+              학력
+            </SectionTitle>
+            {data.education.map((ed, i) => (
+              <div key={i}>
+                <p
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: C.navy,
+                    margin: "0 0 2px",
+                    fontFamily: "'Noto Sans KR', sans-serif",
+                  }}>
+                  {ed.school}
+                </p>
+                <p style={{ fontSize: 14, color: C.muted, margin: "0 0 2px" }}>
+                  {ed.track}
+                </p>
+                <p style={{ fontSize: 13, color: C.muted, margin: "0 0 4px" }}>
+                  {ed.period}
+                </p>
+                <span style={{ fontSize: 13, fontWeight: 600, color: C.blue }}>
+                  {ed.note}
+                </span>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+
+        {/* 가운데 세로: 자격증 */}
+        <FadeUp delay={0.08} style={{ gridColumn: "2 / 3", gridRow: "1 / 3" }}>
+          <div style={{ ...card, height: "100%" }}>
+            <SectionTitle icon="🪪" color="#b45309">
+              자격증
+            </SectionTitle>
+            {data.certifications.map((c, i) => (
+              <div
+                key={i}
+                style={{
+                  ...row,
+                  ...(i === data.certifications.length - 1
+                    ? {
+                        borderBottom: "none",
+                        paddingBottom: 0,
+                        marginBottom: 0,
+                      }
+                    : {}),
+                }}>
+                <div style={{ minWidth: 0, paddingRight: 8 }}>
                   <p
                     style={{
                       fontSize: 14,
-                      fontWeight: 700,
+                      fontWeight: 600,
                       color: C.navy,
                       margin: "0 0 2px",
                       fontFamily: "'Noto Sans KR', sans-serif",
                     }}>
-                    {ed.school}
+                    {c.name}
                   </p>
+                  <p style={{ fontSize: 13, color: C.muted, margin: 0 }}>
+                    {c.org}
+                  </p>
+                </div>
+                <span style={badgeYellow}>{c.date}</span>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+
+        {/* 왼쪽 하단: 수상 */}
+        <FadeUp delay={0.06} style={{ gridColumn: "1 / 2", gridRow: "2 / 3" }}>
+          <div style={card}>
+            <SectionTitle icon="🥇" color={C.red}>
+              수상
+            </SectionTitle>
+            {data.awards.map((a, i) => (
+              <div
+                key={i}
+                style={{
+                  ...row,
+                  ...(i === data.awards.length - 1
+                    ? {
+                        borderBottom: "none",
+                        paddingBottom: 0,
+                        marginBottom: 0,
+                      }
+                    : {}),
+                }}>
+                <div style={{ flex: 1, minWidth: 0, paddingRight: 8 }}>
                   <p
-                    style={{ fontSize: 13, color: C.muted, margin: "0 0 2px" }}>
-                    {ed.track}
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: C.navy,
+                      margin: "0 0 2px",
+                      fontFamily: "'Noto Sans KR', sans-serif",
+                      lineHeight: 1.4,
+                    }}>
+                    {a.title}
                   </p>
-                  <p
-                    style={{ fontSize: 12, color: C.muted, margin: "0 0 4px" }}>
-                    {ed.period}
+                  <p style={{ fontSize: 13, color: C.muted, margin: 0 }}>
+                    {a.org}
                   </p>
-                  <span
-                    style={{ fontSize: 12, fontWeight: 600, color: C.blue }}>
-                    {ed.note}
-                  </span>
                 </div>
-              ))}
-            </div>
-          </FadeUp>
+                <span style={badgeRed}>{a.date}</span>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
 
-          <FadeUp delay={0.08}>
-            <div style={card}>
-              <SectionTitle icon="🥇" color={C.red}>
-                수상
-              </SectionTitle>
-              {data.awards.map((a, i) => (
-                <div
-                  key={i}
-                  style={{
-                    ...row,
-                    ...(i === data.awards.length - 1
-                      ? {
-                          borderBottom: "none",
-                          paddingBottom: 0,
-                          marginBottom: 0,
-                        }
-                      : {}),
-                  }}>
-                  <div style={{ flex: 1, paddingRight: 12 }}>
-                    <p
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 600,
-                        color: C.navy,
-                        margin: "0 0 2px",
-                        fontFamily: "'Noto Sans KR', sans-serif",
-                      }}>
-                      {a.title}
-                    </p>
-                    <p style={{ fontSize: 12, color: C.muted, margin: 0 }}>
-                      {a.org}
-                    </p>
-                  </div>
-                  <span style={badgeRed}>{a.date}</span>
-                </div>
-              ))}
-            </div>
-          </FadeUp>
-
-          <FadeUp delay={0.14}>
-            <div style={card}>
-              <SectionTitle icon="🪪" color="#b45309">
-                자격증
-              </SectionTitle>
-              {data.certifications.map((c, i) => (
-                <div
-                  key={i}
-                  style={{
-                    ...row,
-                    ...(i === data.certifications.length - 1
-                      ? {
-                          borderBottom: "none",
-                          paddingBottom: 0,
-                          marginBottom: 0,
-                        }
-                      : {}),
-                  }}>
-                  <div>
-                    <p
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 600,
-                        color: C.navy,
-                        margin: "0 0 2px",
-                        fontFamily: "'Noto Sans KR', sans-serif",
-                      }}>
-                      {c.name}
-                    </p>
-                    <p style={{ fontSize: 12, color: C.muted, margin: 0 }}>
-                      {c.org}
-                    </p>
-                  </div>
-                  <span style={badgeYellow}>{c.date}</span>
-                </div>
-              ))}
-            </div>
-          </FadeUp>
-        </div>
-
-        {/* 오른쪽: 사진(헤더 겹침) + 연락처 */}
+        {/* 오른쪽: 사진 + 연락처 */}
         <div
           style={{
-            flex: "0 1 240px",
+            gridColumn: "3 / 4",
+            gridRow: "1 / 3",
             display: "flex",
             flexDirection: "column",
             alignItems: "stretch",
+            justifySelf: "start",
+            width: "100%",
           }}>
           <FadeUp delay={0.05}>
-            {/* 증명사진 — marginTop 음수로 헤더에 걸침 */}
             <div
               style={{
-                marginTop: -90,
-                borderRadius: 16,
+                borderRadius: 10,
                 overflow: "hidden",
-                border: `3px solid ${C.surface}`,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-                background: C.blueLight,
-                aspectRatio: "3/4",
+                border: `2px solid ${C.border}`,
+                boxShadow: "0 4px 20px rgba(0,0,0,0.10)",
+                background:
+                  "linear-gradient(180deg, rgba(37,99,235,0.06) 0%, rgba(37,99,235,0.02) 100%)",
+                aspectRatio: "3/4.25",
                 width: "100%",
+                maxWidth: 230,
+                marginLeft: 0,
               }}>
               <img
                 src={data.photo}
@@ -650,22 +664,23 @@ function IntroSection() {
               />
             </div>
 
-            {/* 연락처 카드 — 나이 포함 */}
             <div
               style={{
                 background: C.surface,
                 border: `1px solid ${C.border}`,
                 borderRadius: 12,
-                padding: "18px 20px",
-                marginTop: 16,
+                padding: "14px 16px",
+                marginTop: 10,
                 display: "flex",
                 flexDirection: "column",
-                gap: 11,
+                gap: 9,
                 boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                width: "100%",
+                maxWidth: 230,
               }}>
               <p
                 style={{
-                  fontSize: 10,
+                  fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
@@ -683,11 +698,6 @@ function IntroSection() {
                   label: data.contact.github,
                   href: data.contact.githubUrl,
                 },
-                {
-                  icon: "💼",
-                  label: data.contact.linkedin,
-                  href: data.contact.linkedinUrl,
-                },
               ].map(({ icon, label, href }) => (
                 <div
                   key={label}
@@ -696,7 +706,7 @@ function IntroSection() {
                     style={{
                       fontSize: 14,
                       flexShrink: 0,
-                      width: 20,
+                      width: 18,
                       textAlign: "center",
                     }}>
                     {icon}
@@ -707,7 +717,7 @@ function IntroSection() {
                       target="_blank"
                       rel="noreferrer"
                       style={{
-                        fontSize: 12,
+                        fontSize: 13,
                         color: C.blue,
                         textDecoration: "none",
                         fontWeight: 600,
@@ -718,7 +728,7 @@ function IntroSection() {
                   ) : (
                     <span
                       style={{
-                        fontSize: 12,
+                        fontSize: 13,
                         color: C.navy,
                         wordBreak: "break-all",
                       }}>
@@ -731,6 +741,39 @@ function IntroSection() {
           </FadeUp>
         </div>
       </div>
+
+      {/* 첫 화면 하단에 Skills 제목만 살짝 보이게 */}
+      <div
+        style={{
+          maxWidth: 1180,
+          margin: "14px auto 0",
+          padding: "0 2px",
+        }}>
+        <FadeUp delay={0.1}>
+          <a
+            href="#skills"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 20,
+              fontWeight: 800,
+              color: C.navy,
+              textDecoration: "none",
+              fontFamily: "'Noto Sans KR', sans-serif",
+            }}>
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: C.sky,
+                display: "inline-block",
+              }}
+            />
+          </a>
+        </FadeUp>
+      </div>
     </section>
   );
 }
@@ -742,14 +785,14 @@ function SkillsSection() {
       id="skills"
       style={{
         background: C.skyLight,
-        padding: "48px clamp(16px,6vw,80px)",
+        padding: "18px clamp(20px,4.4vw,64px) 40px",
         borderTop: `1px solid ${C.border}`,
       }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <FadeUp>
           <h2
             style={{
-              fontSize: 22,
+              fontSize: 24,
               fontWeight: 800,
               color: C.navy,
               margin: "0 0 28px",
@@ -773,8 +816,8 @@ function SkillsSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px,1fr))",
-            gap: 16,
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))",
+            gap: 18,
           }}>
           {Object.entries(data.skills).map(([cat, items], ci) => (
             <FadeUp key={cat} delay={ci * 0.08}>
@@ -783,16 +826,16 @@ function SkillsSection() {
                   background: C.surface,
                   border: `1px solid ${C.border}`,
                   borderRadius: 12,
-                  padding: "20px 22px",
+                  padding: "22px 24px",
                 }}>
                 <p
                   style={{
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: 700,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: C.sky,
-                    margin: "0 0 14px",
+                    margin: "0 0 16px",
                   }}>
                   {cat}
                 </p>
@@ -801,12 +844,12 @@ function SkillsSection() {
                     <span
                       key={s}
                       style={{
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: 500,
                         color: C.navy,
                         background: C.bg,
                         border: `1px solid ${C.border}`,
-                        padding: "5px 11px",
+                        padding: "6px 12px",
                         borderRadius: 8,
                       }}>
                       {s}
@@ -822,11 +865,12 @@ function SkillsSection() {
   );
 }
 
-/* ── 프로젝트 카드 (세로 배치, 깔끔) ── */
+/* ── 프로젝트 카드 ── */
 function ProjectCard({ p, index }) {
-  // 개요: 하늘색, 담당역할: 파랑, 구현내용: 빨강
+  const accent = C.blueStrong;
+
   const subHead = (color) => ({
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 700,
     color,
     letterSpacing: "0.06em",
@@ -836,6 +880,7 @@ function ProjectCard({ p, index }) {
     alignItems: "center",
     gap: 6,
   });
+
   const dot = (color) => ({
     width: 6,
     height: 6,
@@ -852,14 +897,15 @@ function ProjectCard({ p, index }) {
           border: `1px solid ${C.border}`,
           borderRadius: 16,
           overflow: "hidden",
-          boxShadow: "0 1px 8px rgba(0,0,0,0.06)",
+          boxShadow: "0 10px 30px rgba(15,23,42,0.06)",
         }}>
-        {/* ── 카드 헤더 ── */}
+        {/* 카드 헤더 */}
         <div
           style={{
-            borderBottom: `3px solid ${C.blue}`,
-            padding: "24px 28px 20px",
-            background: C.blueLight,
+            borderBottom: `1px solid ${C.blueLine}`,
+            padding: "26px 30px 22px",
+            background:
+              "linear-gradient(180deg, rgba(37,99,235,0.08) 0%, rgba(37,99,235,0.03) 100%)",
           }}>
           <div
             style={{
@@ -879,32 +925,36 @@ function ProjectCard({ p, index }) {
                 }}>
                 {p.period}
               </span>
+
               <h3
                 style={{
                   fontSize: 24,
                   fontWeight: 800,
                   color: C.navy,
                   margin: "4px 0 6px",
-                  fontFamily: "'Syne','Noto Sans KR',sans-serif",
-                  lineHeight: 1.2,
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                  lineHeight: 1.3,
+                  letterSpacing: "-0.01em",
                 }}>
                 {p.title}
               </h3>
+
               <p
                 style={{
-                  fontSize: 14,
-                  color: C.blue,
+                  fontSize: 16,
+                  color: accent,
                   fontWeight: 500,
                   margin: "0 0 10px",
-                  fontFamily: "'Noto Sans KR',sans-serif",
+                  fontFamily: "'Noto Sans KR', sans-serif",
                 }}>
                 {p.subtitle}
               </p>
+
               <span
                 style={{
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: 700,
-                  background: C.navy,
+                  background: "rgba(15,23,42,0.92)",
                   color: "#fff",
                   padding: "4px 12px",
                   borderRadius: 20,
@@ -912,6 +962,7 @@ function ProjectCard({ p, index }) {
                 {p.role}
               </span>
             </div>
+
             <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
               {p.demo && (
                 <a
@@ -919,10 +970,10 @@ function ProjectCard({ p, index }) {
                   target="_blank"
                   rel="noreferrer"
                   style={{
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: 700,
-                    padding: "7px 16px",
-                    background: C.blue,
+                    padding: "8px 16px",
+                    background: "rgba(37,99,235,0.92)",
                     color: "#fff",
                     borderRadius: 8,
                     textDecoration: "none",
@@ -930,6 +981,7 @@ function ProjectCard({ p, index }) {
                   Live Demo ↗
                 </a>
               )}
+
               <a
                 href={p.github}
                 target="_blank"
@@ -938,9 +990,9 @@ function ProjectCard({ p, index }) {
                   fontSize: 12,
                   fontWeight: 700,
                   padding: "7px 16px",
-                  background: C.surface,
-                  color: C.blue,
-                  border: `1px solid ${C.blue}`,
+                  background: "rgba(255,255,255,0.72)",
+                  color: accent,
+                  border: `1px solid ${C.blueLine}`,
                   borderRadius: 8,
                   textDecoration: "none",
                 }}>
@@ -949,7 +1001,7 @@ function ProjectCard({ p, index }) {
             </div>
           </div>
 
-          {/* 태그 — 노랑 배지 */}
+          {/* 태그 */}
           <div
             style={{
               display: "flex",
@@ -961,11 +1013,11 @@ function ProjectCard({ p, index }) {
               <span
                 key={t}
                 style={{
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: 700,
-                  color: "#92400e",
-                  background: C.yellowLight,
-                  border: `1px solid ${C.yellow}`,
+                  color: accent,
+                  background: "rgba(37,99,235,0.08)",
+                  border: `1px solid ${C.blueLine}`,
                   padding: "3px 10px",
                   borderRadius: 20,
                 }}>
@@ -975,40 +1027,38 @@ function ProjectCard({ p, index }) {
           </div>
         </div>
 
-        {/* ── 세로 본문 ── */}
+        {/* 세로 본문 */}
         <div
           style={{
-            padding: "24px 28px",
+            padding: "26px 30px",
             display: "flex",
             flexDirection: "column",
-            gap: 24,
+            gap: 20,
           }}>
-          {/* 프로젝트 개요 — 하늘색 */}
           <div>
-            <p style={subHead(C.sky)}>
-              <span style={dot(C.sky)} />
+            <p style={subHead(accent)}>
+              <span style={dot(accent)} />
               프로젝트 개요
             </p>
             <p
               style={{
-                fontSize: 14,
-                color: "#374151",
+                fontSize: 15,
+                color: C.textSoft,
                 lineHeight: 1.85,
                 margin: 0,
                 fontFamily: "'Noto Sans KR',sans-serif",
                 paddingLeft: 12,
-                borderLeft: `3px solid ${C.skyLight}`,
+                borderLeft: `3px solid ${C.blueSoftMid}`,
               }}>
               {p.overview}
             </p>
           </div>
 
-          <div style={{ height: 1, background: C.border }} />
+          <div style={{ height: 1, background: C.blueSoftMid }} />
 
-          {/* 담당 역할 — 파랑 */}
           <div>
-            <p style={subHead(C.blue)}>
-              <span style={dot(C.blue)} />
+            <p style={subHead(accent)}>
+              <span style={dot(accent)} />
               담당 역할
             </p>
             <ul
@@ -1030,7 +1080,7 @@ function ProjectCard({ p, index }) {
                   }}>
                   <span
                     style={{
-                      color: C.blue,
+                      color: accent,
                       fontSize: 14,
                       flexShrink: 0,
                       marginTop: 1,
@@ -1039,8 +1089,8 @@ function ProjectCard({ p, index }) {
                   </span>
                   <span
                     style={{
-                      fontSize: 13,
-                      color: "#374151",
+                      fontSize: 14,
+                      color: C.textSoft,
                       lineHeight: 1.65,
                       fontFamily: "'Noto Sans KR',sans-serif",
                     }}>
@@ -1051,12 +1101,11 @@ function ProjectCard({ p, index }) {
             </ul>
           </div>
 
-          <div style={{ height: 1, background: C.border }} />
+          <div style={{ height: 1, background: C.blueSoftMid }} />
 
-          {/* 주요 구현 내용 — 빨강 */}
           <div>
-            <p style={subHead(C.red)}>
-              <span style={dot(C.red)} />
+            <p style={subHead(accent)}>
+              <span style={dot(accent)} />
               주요 구현 내용
             </p>
             <ul
@@ -1078,7 +1127,7 @@ function ProjectCard({ p, index }) {
                   }}>
                   <span
                     style={{
-                      color: C.red,
+                      color: accent,
                       fontSize: 14,
                       flexShrink: 0,
                       marginTop: 1,
@@ -1087,8 +1136,8 @@ function ProjectCard({ p, index }) {
                   </span>
                   <span
                     style={{
-                      fontSize: 13,
-                      color: "#374151",
+                      fontSize: 14,
+                      color: C.textSoft,
                       lineHeight: 1.7,
                       fontFamily: "'Noto Sans KR',sans-serif",
                     }}>
@@ -1111,10 +1160,10 @@ function ProjectsSection() {
       id="projects"
       style={{
         background: C.bg,
-        padding: "48px clamp(16px,6vw,80px)",
+        padding: "40px clamp(20px,4.4vw,64px)",
         borderTop: `1px solid ${C.border}`,
       }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <FadeUp>
           <h2
             style={{
@@ -1149,6 +1198,52 @@ function ProjectsSection() {
   );
 }
 
+/* ── 푸터 ── */
+function Footer() {
+  return (
+    <footer
+      style={{
+        background: "#ffffff",
+        borderTop: `1px solid ${C.border}`,
+        padding: "22px clamp(20px,4vw,60px)",
+      }}>
+      <div
+        style={{
+          maxWidth: 1140,
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 12,
+          flexWrap: "wrap",
+        }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: 13,
+            color: C.muted,
+            fontFamily: "'Noto Sans KR', sans-serif",
+          }}>
+          © 2025 {data.name}. All rights reserved.
+        </p>
+        <a
+          href={data.contact.githubUrl}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            fontSize: 13,
+            fontWeight: 600,
+            color: C.blue,
+            textDecoration: "none",
+            fontFamily: "'Noto Sans KR', sans-serif",
+          }}>
+          GitHub ↗
+        </a>
+      </div>
+    </footer>
+  );
+}
+
 /* ── 메인 앱 ── */
 export default function Portfolio() {
   return (
@@ -1156,37 +1251,15 @@ export default function Portfolio() {
       style={{
         fontFamily: "'DM Sans','Noto Sans KR',sans-serif",
         background: C.bg,
-        minHeight: "100vh",
         color: C.navy,
+        lineHeight: 1.6,
       }}>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-
       <Nav />
       <Header />
       <IntroSection />
       <SkillsSection />
       <ProjectsSection />
-
-      <footer
-        style={{
-          background: C.headerBg,
-          color: "rgba(255,255,255,0.4)",
-          textAlign: "center",
-          padding: "28px 20px",
-          fontSize: 12,
-          borderTop: "4px solid transparent",
-          borderImage:
-            "linear-gradient(90deg, #4285f4 0%, #ea4335 33%, #fbbc04 66%, #00b4d8 100%) 1",
-        }}>
-        <p style={{ margin: 0 }}>
-          © 2025{" "}
-          <span style={{ color: "#fff", fontWeight: 600 }}>{data.name}</span> ·
-          Built with React
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
