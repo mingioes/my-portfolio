@@ -377,7 +377,7 @@ function Header() {
         style={{
           position: "relative",
           zIndex: 1,
-          maxWidth: 900,
+          maxWidth: 1200,
           margin: "0 auto",
           display: "flex",
           alignItems: "center",
