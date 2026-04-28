@@ -379,8 +379,8 @@ function Header() {
           margin: "0 auto",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: 40,
+          justifyContent: "flex-start",
+          gap: 24,
         }}>
         <div style={{ flex: 1 }}>
           <p
@@ -444,7 +444,7 @@ function Header() {
         <div
           style={{
             flexShrink: 0,
-            width: 180,
+            width: 150,
             display: "flex",
             flexDirection: "column",
             gap: 12,
@@ -564,16 +564,16 @@ function AboutSection() {
                 fontFamily: "'Noto Sans KR', sans-serif",
                 maxWidth: 780,
               }}>
-              컴퓨터공학을 전공하며 두 번의 기업연계 프로젝트에서
+              컴퓨터공학을 전공하며 두 번의 기업연계 프로젝트에서{" "}
               <strong style={{ color: C.navy, fontWeight: 700 }}>
-                {" "}
                 이슈 트래킹 체계 설계, 운영 지표 수치화, 파트너사 커뮤니케이션
               </strong>
-              을 직접 담당했습니다. 개발 배경 덕분에 서버 로그를 직접 조회하고
-              엔지니어링 팀과 기술적으로 소통할 수 있어,
+              을 직접 담당했습니다. 개발을 해본 경험 덕분에 서버 로그를 직접
+              보고 엔지니어링 팀과 기술 이야기를 나눌 수 있어, 운영과 개발
+              사이에서
               <strong style={{ color: C.navy, fontWeight: 700 }}>
                 {" "}
-                운영 현장에서 개발팀과의 가교 역할
+                실무 언어로 소통하는 역할
               </strong>
               을 할 수 있습니다. 데이터로 문제를 발견하고, 협력하며 해결하는
               방식으로 우아한청년들의 협력사 운영 효율화에 기여하고 싶습니다.
