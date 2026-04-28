@@ -1071,30 +1071,32 @@ function ProjectCard({ p, index }) {
               </div>
             </div>
           ))}
-          <div
-            style={{
-              marginTop: 4,
-              background: C.blueLight,
-              border: `1px solid ${C.blueLine}`,
-              borderRadius: 8,
-              padding: "11px 16px",
-              display: "flex",
-              alignItems: "flex-start",
-              gap: 10,
-            }}>
-            <span style={{ fontSize: 14, flexShrink: 0 }}>🏆</span>
-            <p
+          {p.result && (
+            <div
               style={{
-                fontSize: 13,
-                fontWeight: 600,
-                color: C.blueStrong,
-                margin: 0,
-                lineHeight: 1.6,
-                fontFamily: "'Noto Sans KR', sans-serif",
+                marginTop: 4,
+                background: C.blueLight,
+                border: `1px solid ${C.blueLine}`,
+                borderRadius: 8,
+                padding: "11px 16px",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 10,
               }}>
-              {p.result}
-            </p>
-          </div>
+              <span style={{ fontSize: 14, flexShrink: 0 }}>🏆</span>
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: C.blueStrong,
+                  margin: 0,
+                  lineHeight: 1.6,
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                }}>
+                {p.result}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </FadeUp>
