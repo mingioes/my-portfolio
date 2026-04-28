@@ -557,14 +557,14 @@ function AboutSection() {
         borderBottom: `1px solid ${C.border}`,
         padding: "36px clamp(20px,4vw,60px)",
       }}>
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <FadeUp>
           <div
             style={{
               display: "flex",
               gap: 20,
               alignItems: "stretch",
-              maxWidth: 560,
+              maxWidth: 780,
             }}>
             <div
               style={{
@@ -582,6 +582,7 @@ function AboutSection() {
                 lineHeight: 2,
                 margin: 0,
                 fontFamily: "'Noto Sans KR', sans-serif",
+                maxWidth: 760,
               }}>
               컴퓨터공학을 전공하며 두 번의 기업연계 프로젝트에서{" "}
               <strong style={{ color: C.navy, fontWeight: 700 }}>
