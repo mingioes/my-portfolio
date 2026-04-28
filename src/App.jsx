@@ -359,6 +359,7 @@ function Header() {
             background: "rgba(255,255,255,0.10)",
           }}
         />
+
         <div
           style={{
             position: "absolute",
@@ -371,18 +372,19 @@ function Header() {
           }}
         />
       </div>
+
       <div
         style={{
           position: "relative",
           zIndex: 1,
-          maxWidth: 1140,
+          maxWidth: 900,
           margin: "0 auto",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-start",
-          gap: 24,
+          justifyContent: "center",
+          gap: 48,
         }}>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, maxWidth: 560 }}>
           <p
             style={{
               fontSize: 12,
@@ -394,6 +396,7 @@ function Header() {
             }}>
             Operation Support
           </p>
+
           <h1
             style={{
               fontFamily: "'Noto Sans KR', sans-serif",
@@ -407,6 +410,7 @@ function Header() {
             안녕하세요, <span style={{ color: C.blue }}>{data.name}</span>
             입니다.
           </h1>
+
           <p
             style={{
               fontSize: 15,
@@ -417,6 +421,7 @@ function Header() {
             }}>
             {data.tagline}
           </p>
+
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             {[
               "SQL",
@@ -441,10 +446,11 @@ function Header() {
             ))}
           </div>
         </div>
+
         <div
           style={{
             flexShrink: 0,
-            width: 150,
+            width: 160,
             display: "flex",
             flexDirection: "column",
             gap: 12,
@@ -468,14 +474,17 @@ function Header() {
                 display: "block",
               }}
               onError={(e) => {
-                e.target.src = "https://via.placeholder.com/180x240?text=Photo";
+                e.currentTarget.src =
+                  "https://via.placeholder.com/180x240?text=Photo";
               }}
             />
           </div>
+
           <div
             style={{
-              background: "#ffffff",
-              border: `1px solid ${C.border}`,
+              background: "rgba(255,255,255,0.5)",
+              backdropFilter: "blur(8px)",
+              border: `1px solid rgba(255,255,255,0.8)`,
               borderRadius: 10,
               padding: "12px 14px",
               display: "flex",
@@ -494,11 +503,15 @@ function Header() {
               }}>
               Contact
             </p>
+
             {[
               { label: `${data.age} · ${data.birth}` },
               { label: data.contact.email },
               { label: data.contact.phone },
-              { label: data.contact.github, href: data.contact.githubUrl },
+              {
+                label: data.contact.github,
+                href: data.contact.githubUrl,
+              },
             ].map(({ label, href }) => (
               <div key={label}>
                 {href ? (
