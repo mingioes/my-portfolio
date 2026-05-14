@@ -124,7 +124,7 @@ const projects = [
         body: "규격 미달로 인한 발송 실패 리스크를 사전에 차단하였으며, 하위 품질 업종의 만족도를 데이터 기반 프롬프트 튜닝으로 대폭 개선했습니다.",
       },
     ],
-    archImg: "./purio.png",
+    archImg: "./ppurio.png",
   },
 ];
 
@@ -314,76 +314,57 @@ function Navbar({ scrolled }) {
    HERO
 ═══════════════════════════════════════════ */
 function Hero() {
+  const competencies = [
+    {
+      icon: "🤖",
+      label: "RAG 시스템 설계",
+      sub: "Amazon Bedrock · OpenSearch",
+    },
+    {
+      icon: "⚡",
+      label: "On-Device AI",
+      sub: "Snapdragon NPU · 파라미터 튜닝",
+    },
+    { icon: "✍️", label: "Prompt Engineering", sub: "품질 측정 · 편차 개선" },
+    { icon: "☁️", label: "AWS 클라우드", sub: "S3 · Lambda · Bedrock" },
+    { icon: "🔍", label: "이슈 트래킹", sub: "4단계 체계 · 리스크 차단" },
+    { icon: "🌐", label: "글로벌 소통", sub: "Qualcomm 본사 영어 협업" },
+  ];
+
   return (
     <section
       style={{
         minHeight: "100vh",
-        background: `linear-gradient(145deg, ${DARK} 0%, #1e1b4b 55%, ${DARK} 100%)`,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        overflow: "hidden",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
         fontFamily: FF,
       }}>
-      {/* 글로우 */}
+      {/* ── 왼쪽 패널: 흰 배경 + 사진 + 신상정보 ── */}
       <div
         style={{
-          position: "absolute",
-          top: "15%",
-          right: "12%",
-          width: 400,
-          height: 400,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle,rgba(79,123,255,.14) 0%,transparent 65%)",
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          bottom: "10%",
-          left: "6%",
-          width: 280,
-          height: 280,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle,rgba(129,140,248,.10) 0%,transparent 65%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          textAlign: "center",
-          zIndex: 1,
-          padding: "0 24px",
-          maxWidth: 640,
+          background: "#fff",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "100px 64px 64px",
+          borderRight: "1px solid #f1f5f9",
         }}>
-        {/* 사진 */}
+        {/* 증명사진 */}
         <div
           style={{
             width: 110,
-            height: 110,
-            borderRadius: "50%",
-            margin: "0 auto 32px",
-            background: "rgba(255,255,255,0.07)",
-            border: "2px solid rgba(255,255,255,0.15)",
-            overflow: "hidden", // 사진이 원형 밖으로 나가지 않게 함
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            height: 138,
+            borderRadius: 14,
+            overflow: "hidden",
+            background: "#f1f5f9",
+            border: "1px solid #e2e8f0",
+            marginBottom: 32,
+            flexShrink: 0,
           }}>
           <img
             src="./IMG_2124.jpg"
             alt="강민서 증명사진"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover", // 사진 비율을 유지하며 영역을 채움
-            }}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </div>
 
@@ -391,17 +372,18 @@ function Hero() {
         <div
           style={{
             display: "inline-block",
-            marginBottom: 18,
-            fontSize: 11,
+            width: "fit-content",
+            marginBottom: 12,
+            fontSize: 10,
             fontFamily: MONO,
-            fontWeight: 600,
-            letterSpacing: "0.18em",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
             textTransform: "uppercase",
             color: ACCENT,
-            background: "rgba(79,123,255,.13)",
-            border: "1px solid rgba(79,123,255,.3)",
+            background: "#eef2ff",
+            border: "1px solid #c7d2fe",
             borderRadius: 99,
-            padding: "5px 18px",
+            padding: "4px 14px",
           }}>
           {ROLE}
         </div>
@@ -409,9 +391,9 @@ function Hero() {
         {/* 이름 */}
         <h1
           style={{
-            fontSize: 64,
+            fontSize: 56,
             fontWeight: 800,
-            color: "#fff",
+            color: "#0f172a",
             margin: "0 0 28px",
             letterSpacing: "-2px",
             lineHeight: 1.05,
@@ -419,49 +401,54 @@ function Hero() {
           {NAME}
         </h1>
 
-        {/* 개인정보 칩 — 가로 한 줄 */}
+        {/* 신상정보 */}
         <div
           style={{
             display: "flex",
+            flexDirection: "column",
             gap: 10,
-            justifyContent: "center",
-            flexWrap: "wrap",
-            marginBottom: 36,
+            marginBottom: 40,
           }}>
           {[
-            { label: "나이", val: AGE, icon: "🎂" },
-            { label: "연락처", val: PHONE, icon: "📱" },
-            { label: "이메일", val: EMAIL, icon: "✉️" },
+            { icon: "🎂", label: "나이", val: AGE },
+            { icon: "📱", label: "연락처", val: PHONE },
+            { icon: "✉️", label: "이메일", val: EMAIL },
           ].map((item) => (
             <div
               key={item.label}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 9,
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.13)",
-                borderRadius: 12,
-                padding: "10px 18px",
-              }}>
-              <span style={{ fontSize: 16 }}>{item.icon}</span>
-              <div style={{ textAlign: "left" }}>
+              style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 9,
+                  background: "#f8fafc",
+                  border: "1px solid #e2e8f0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 15,
+                  flexShrink: 0,
+                }}>
+                {item.icon}
+              </div>
+              <div>
                 <div
                   style={{
                     fontSize: 9,
                     fontFamily: MONO,
-                    color: "rgba(255,255,255,.35)",
+                    color: "#94a3b8",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    marginBottom: 2,
+                    marginBottom: 1,
                   }}>
                   {item.label}
                 </div>
                 <div
                   style={{
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: 600,
-                    color: "rgba(255,255,255,.88)",
+                    color: "#1e293b",
                     fontFamily: MONO,
                   }}>
                   {item.val}
@@ -471,8 +458,8 @@ function Hero() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+        {/* CTA 버튼 */}
+        <div style={{ display: "flex", gap: 10 }}>
           <button
             onClick={() => scrollTo("projects")}
             style={{
@@ -482,9 +469,9 @@ function Hero() {
               cursor: "pointer",
               fontFamily: MONO,
               fontWeight: 700,
-              fontSize: 13,
-              padding: "12px 30px",
-              borderRadius: 10,
+              fontSize: 12,
+              padding: "11px 22px",
+              borderRadius: 9,
             }}>
             프로젝트 보기 ↓
           </button>
@@ -493,14 +480,14 @@ function Hero() {
             target="_blank"
             rel="noreferrer"
             style={{
-              background: "transparent",
-              color: "rgba(255,255,255,.85)",
-              border: "1.5px solid rgba(255,255,255,.28)",
-              borderRadius: 10,
+              background: "#fff",
+              color: "#374151",
+              border: "1.5px solid #d1d5db",
+              borderRadius: 9,
               fontFamily: MONO,
               fontWeight: 600,
-              fontSize: 13,
-              padding: "12px 30px",
+              fontSize: 12,
+              padding: "11px 22px",
               textDecoration: "none",
               display: "inline-block",
             }}>
@@ -509,36 +496,141 @@ function Hero() {
         </div>
       </div>
 
-      {/* 스크롤 유도 */}
+      {/* ── 오른쪽 패널: 다크 배경 + 핵심역량 카드 ── */}
       <div
-        onClick={() => scrollTo("about")}
         style={{
-          position: "absolute",
-          bottom: 28,
-          left: "50%",
-          transform: "translateX(-50%)",
+          background: `linear-gradient(145deg, ${DARK} 0%, #1e1b4b 60%, #0f172a 100%)`,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          gap: 4,
-          cursor: "pointer",
-          color: "rgba(255,255,255,.28)",
-          fontSize: 9,
-          fontFamily: MONO,
-          letterSpacing: "0.14em",
-          textTransform: "uppercase",
-          animation: "hb 2.4s ease-in-out infinite",
+          justifyContent: "center",
+          padding: "100px 56px 64px",
+          position: "relative",
+          overflow: "hidden",
         }}>
-        <span>scroll</span>
-        <span style={{ fontSize: 15 }}>↓</span>
-      </div>
+        {/* 배경 글로우 */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            right: "-5%",
+            width: 320,
+            height: 320,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle,rgba(79,123,255,.15) 0%,transparent 65%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "8%",
+            left: "-5%",
+            width: 220,
+            height: 220,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle,rgba(129,140,248,.10) 0%,transparent 65%)",
+            pointerEvents: "none",
+          }}
+        />
 
-      <style>{`
-        @keyframes hb {
-          0%,100%{transform:translateX(-50%) translateY(0);opacity:.28}
-          50%{transform:translateX(-50%) translateY(7px);opacity:.55}
-        }
-      `}</style>
+        {/* 섹션 레이블 */}
+        <p
+          style={{
+            margin: "0 0 10px",
+            fontSize: 10,
+            fontFamily: MONO,
+            fontWeight: 700,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "rgba(79,123,255,.8)",
+            zIndex: 1,
+          }}>
+          ── Core Competencies
+        </p>
+        <div
+          style={{
+            width: 36,
+            height: 3,
+            borderRadius: 2,
+            background: "linear-gradient(90deg,#4f7bff,#818cf8)",
+            marginBottom: 36,
+            zIndex: 1,
+          }}
+        />
+
+        {/* 역량 카드 그리드 */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 12,
+            zIndex: 1,
+          }}>
+          {competencies.map((c) => (
+            <div
+              key={c.label}
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 16,
+                padding: "18px 18px",
+                backdropFilter: "blur(8px)",
+                transition: "background 0.2s",
+              }}>
+              <div style={{ fontSize: 22, marginBottom: 8 }}>{c.icon}</div>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: "#fff",
+                  marginBottom: 4,
+                  lineHeight: 1.3,
+                }}>
+                {c.label}
+              </div>
+              <div
+                style={{
+                  fontSize: 11,
+                  color: "rgba(255,255,255,0.45)",
+                  fontFamily: MONO,
+                  lineHeight: 1.4,
+                }}>
+                {c.sub}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 스크롤 유도 */}
+        <div
+          onClick={() => scrollTo("about")}
+          style={{
+            marginTop: 40,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            cursor: "pointer",
+            color: "rgba(255,255,255,.25)",
+            fontSize: 10,
+            fontFamily: MONO,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            zIndex: 1,
+            animation: "hb 2.4s ease-in-out infinite",
+          }}>
+          <span>scroll down</span>
+          <span style={{ fontSize: 13 }}>↓</span>
+        </div>
+
+        <style>{`
+          @keyframes hb {
+            0%,100%{opacity:.25;transform:translateY(0)}
+            50%{opacity:.5;transform:translateY(5px)}
+          }
+        `}</style>
+      </div>
     </section>
   );
 }
