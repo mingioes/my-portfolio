@@ -49,7 +49,7 @@ const projects = [
         body: "S3 동기화만으로 최신 정보를 즉시 반영하여 컷오프 문제를 해결했으며, 음악 산업 종사자의 리서치 시간을 대폭 절감할 수 있는 분석 기반을 마련했습니다. [cite: 16, 17]",
       },
     ],
-    archImg: "/rag.png",
+    archImg: "./rag.png",
   },
   {
     num: "02",
@@ -85,7 +85,7 @@ const projects = [
     ],
     award:
       "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
-    archImg: "/wakey.png",
+    archImg: "./wakey.png",
   },
   {
     num: "03",
@@ -124,7 +124,7 @@ const projects = [
         body: "규격 미달로 인한 발송 실패 리스크를 사전에 차단하였으며, 하위 품질 업종의 만족도를 데이터 기반 프롬프트 튜닝으로 대폭 개선했습니다.",
       },
     ],
-    archImg: "/purio.png",
+    archImg: "./purio.png",
   },
 ];
 
@@ -377,7 +377,7 @@ function Hero() {
             justifyContent: "center",
           }}>
           <img
-            src="/IMG_2124.jpg"
+            src="./IMG_2124.jpg"
             alt="강민서 증명사진"
             style={{
               width: "100%",
