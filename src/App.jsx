@@ -352,13 +352,13 @@ function Hero() {
         {/* 증명사진 */}
         <div
           style={{
-            width: 110,
-            height: 138,
-            borderRadius: 14,
+            width: 200,
+            height: 252,
+            borderRadius: 18,
             overflow: "hidden",
             background: "#f1f5f9",
             border: "1px solid #e2e8f0",
-            marginBottom: 32,
+            marginBottom: 28,
             flexShrink: 0,
           }}>
           <img
@@ -373,17 +373,16 @@ function Hero() {
           style={{
             display: "inline-block",
             width: "fit-content",
-            marginBottom: 12,
-            fontSize: 10,
+            marginBottom: 14,
+            fontSize: 13,
             fontFamily: MONO,
             fontWeight: 700,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
+            letterSpacing: "0.05em",
             color: ACCENT,
             background: "#eef2ff",
             border: "1px solid #c7d2fe",
             borderRadius: 99,
-            padding: "4px 14px",
+            padding: "7px 18px",
           }}>
           {ROLE}
         </div>
@@ -1215,36 +1214,14 @@ function Contact() {
       label: "Phone",
       val: PHONE,
       href: `tel:${PHONE.replace(/-/g, "")}`,
-      sub: "언제든지 연락 주세요",
     },
-    {
-      icon: "✉️",
-      label: "Email",
-      val: EMAIL,
-      href: `mailto:${EMAIL}`,
-      sub: "빠르게 답변 드립니다",
-    },
-    {
-      icon: "💻",
-      label: "GitHub",
-      val: "github.com/ycnham",
-      href: GITHUB,
-      sub: "프로젝트 코드 확인",
-    },
-    {
-      icon: "🎓",
-      label: "학교",
-      val: "한성대학교 컴퓨터공학부",
-      href: null,
-      sub: "2022.03 – 2026.02 졸업",
-    },
+    { icon: "✉️", label: "Email", val: EMAIL, href: `mailto:${EMAIL}` },
   ];
 
   return (
     <Section id="contact" bg="#f8fafc">
       <SectionHeading>Contact</SectionHeading>
 
-      {/* 상단 한 줄 메시지 */}
       <p
         style={{
           margin: "0 0 36px",
@@ -1257,26 +1234,20 @@ function Contact() {
         아래 채널로 편하게 연락해 주세요.
       </p>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 16,
-          maxWidth: 680,
-        }}>
+      <div style={{ display: "flex", gap: 16, maxWidth: 480 }}>
         {items.map((item) => (
           <div
             key={item.label}
             style={{
+              flex: 1,
               background: "#fff",
               border: "1px solid #e2e8f0",
               borderRadius: 16,
-              padding: "22px 24px",
+              padding: "24px 26px",
               display: "flex",
               alignItems: "center",
               gap: 18,
             }}>
-            {/* 아이콘 박스 */}
             <div
               style={{
                 flexShrink: 0,
@@ -1291,12 +1262,10 @@ function Contact() {
               }}>
               {item.icon}
             </div>
-
-            {/* 텍스트 */}
             <div style={{ minWidth: 0 }}>
               <p
                 style={{
-                  margin: "0 0 3px",
+                  margin: "0 0 4px",
                   fontSize: 10,
                   fontFamily: MONO,
                   fontWeight: 700,
@@ -1306,38 +1275,20 @@ function Contact() {
                 }}>
                 {item.label}
               </p>
-              {item.href ? (
-                <a
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noreferrer"
-                  style={{
-                    display: "block",
-                    margin: "0 0 3px",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    color: "#0f172a",
-                    textDecoration: "none",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}>
-                  {item.val}
-                </a>
-              ) : (
-                <p
-                  style={{
-                    margin: "0 0 3px",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    color: "#0f172a",
-                  }}>
-                  {item.val}
-                </p>
-              )}
-              <p style={{ margin: 0, fontSize: 11, color: "#94a3b8" }}>
-                {item.sub}
-              </p>
+              <a
+                href={item.href}
+                style={{
+                  display: "block",
+                  fontSize: 14,
+                  fontWeight: 700,
+                  color: "#0f172a",
+                  textDecoration: "none",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}>
+                {item.val}
+              </a>
             </div>
           </div>
         ))}
@@ -1371,8 +1322,7 @@ function Footer() {
           fontFamily: MONO,
           lineHeight: 1.9,
         }}>
-        github.com/ycnham · AX팀 AI 서비스 개발자 포트폴리오 · 한성대학교
-        컴퓨터공학부
+        강민서 포트폴리오
       </p>
     </footer>
   );
