@@ -49,7 +49,7 @@ const projects = [
         body: "S3 동기화만으로 최신 정보를 즉시 반영하여 컷오프 문제를 해결했으며, 음악 산업 종사자의 리서치 시간을 대폭 절감할 수 있는 분석 기반을 마련했습니다. [cite: 16, 17]",
       },
     ],
-    archImg: "assets/rag.png",
+    archImg: "/rag.png",
   },
   {
     num: "02",
@@ -85,7 +85,7 @@ const projects = [
     ],
     award:
       "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
-    archImg: "assets/wakey.png",
+    archImg: "/wakey.png",
   },
   {
     num: "03",
@@ -124,7 +124,7 @@ const projects = [
         body: "규격 미달로 인한 발송 실패 리스크를 사전에 차단하였으며, 하위 품질 업종의 만족도를 데이터 기반 프롬프트 튜닝으로 대폭 개선했습니다.",
       },
     ],
-    archImg: "assets/purio.png",
+    archImg: "/purio.png",
   },
 ];
 
@@ -371,22 +371,20 @@ function Hero() {
             margin: "0 auto 32px",
             background: "rgba(255,255,255,0.07)",
             border: "2px solid rgba(255,255,255,0.15)",
+            overflow: "hidden", // 사진이 원형 밖으로 나가지 않게 함
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: 3,
           }}>
-          <span style={{ fontSize: 38, opacity: 0.35 }}>👤</span>
-          <span
+          <img
+            src="/IMG_2124.jpg"
+            alt="강민서 증명사진"
             style={{
-              fontSize: 8,
-              color: "rgba(255,255,255,.28)",
-              fontFamily: MONO,
-              letterSpacing: "0.5px",
-            }}>
-            증명사진
-          </span>
+              width: "100%",
+              height: "100%",
+              objectFit: "cover", // 사진 비율을 유지하며 영역을 채움
+            }}
+          />
         </div>
 
         {/* 직군 뱃지 */}
