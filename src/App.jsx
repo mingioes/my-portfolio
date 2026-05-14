@@ -346,7 +346,7 @@ function Hero() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "100px 64px 64px",
+          padding: "100px 48px 64px 120px",
           borderRight: "1px solid #f1f5f9",
         }}>
         {/* 증명사진 */}
