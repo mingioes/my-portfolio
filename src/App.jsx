@@ -677,6 +677,239 @@ function SectionHeading({ children }) {
   );
 }
 
+const overviewProjects = [
+  {
+    num: "01",
+    period: "2025.11 – 2025.12",
+    category: "산학협력 · AWS",
+    name: "MusicRAG",
+    subtitle: "RAG 기반 지능형 음악 정보 검색 및 분석 시스템",
+    tags: ["Amazon Bedrock", "OpenSearch", "FastAPI", "RAG"],
+    highlights: [
+      "S3 자동화 파이프라인 · Agentic RAG 3단계 추론 체인",
+      "내부 DB 부족 시 외부 인터넷 검색으로 자동 확장",
+      "GS 네오텍 멘토링 · AWS 클라우드 기반",
+    ],
+    anchor: "projects",
+  },
+  {
+    num: "02",
+    period: "2024.09 – 2025.05",
+    category: "Qualcomm 기업연계",
+    name: "Wakey Wakey",
+    subtitle: "Snapdragon NPU 기반 On-Device AI 스마트 앨범",
+    tags: ["On-Device AI", "NPU 최적화", "이슈 트래킹"],
+    highlights: [
+      "객체 탐지 정확도 40% 이상 향상",
+      "Qualcomm 본사 엔지니어 영어 직접 소통",
+      "🏆 캡스톤 최우수상 · 학회 우수상",
+    ],
+    anchor: "projects",
+  },
+  {
+    num: "03",
+    period: "2024.09 – 2024.12",
+    category: "다우기술 기업연계",
+    name: "뿌리오 AI 솔루션",
+    subtitle: "MMS 마케팅 이미지 자동 생성 및 검증 시스템",
+    tags: ["DALL-E 3", "GPT-4", "Selenium", "프롬프트 엔지니어링"],
+    highlights: [
+      "규격 위반 3건 사전 발견 · 운영 리스크 차단",
+      "MMS 12개 항목 자동화 검증 체계 수립",
+      "업종별 품질 편차 수치 분석 · 개선",
+    ],
+    anchor: "projects",
+  },
+];
+
+function ProjectsOverview() {
+  return (
+    <section
+      style={{
+        background: "#f8fafc",
+        borderTop: "1px solid #f1f5f9",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 960,
+          margin: "0 auto",
+          padding: "72px 40px 80px",
+        }}
+      >
+        {/* 섹션 헤더 */}
+        <div style={{ marginBottom: 36 }}>
+          <p
+            style={{
+              margin: "0 0 8px",
+              fontSize: 11,
+              fontFamily: MONO,
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: ACCENT,
+            }}
+          >
+            ── Projects Overview
+          </p>
+          <div
+            style={{
+              width: 40,
+              height: 3,
+              borderRadius: 2,
+              background: `linear-gradient(90deg,${ACCENT},#818cf8)`,
+              marginBottom: 14,
+            }}
+          />
+          <p
+            style={{
+              margin: 0,
+              fontSize: 12,
+              fontFamily: MONO,
+              color: "#94a3b8",
+            }}
+          >
+            총 {overviewProjects.length}개 프로젝트 · 클릭하면 상세 내용으로 이동합니다
+          </p>
+        </div>
+
+        {/* 카드 그리드 */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 16,
+          }}
+        >
+          {overviewProjects.map((proj) => (
+            <OverviewCard key={proj.num} proj={proj} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OverviewCard({ proj }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      onClick={() => scrollTo(proj.anchor)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: "#fff",
+        border: `1.5px solid ${hovered ? ACCENT : "#c7d2fe"}`,
+        borderRadius: 18,
+        padding: "22px 24px",
+        cursor: "pointer",
+        position: "relative",
+        overflow: "hidden",
+        transform: hovered ? "translateY(-3px)" : "none",
+        boxShadow: hovered
+          ? "0 8px 28px rgba(79,123,255,0.10)"
+          : "none",
+        transition: "all 0.2s ease",
+      }}
+    >
+
+      {/* 번호 + 기간 */}
+      <p
+        style={{
+          margin: "0 0 12px",
+          fontSize: 11,
+          fontFamily: MONO,
+          fontWeight: 700,
+          color: "#94a3b8",
+          letterSpacing: "0.04em",
+        }}
+      >
+        #{proj.num} · {proj.period}
+      </p>
+
+      {/* 이름 */}
+      <p
+        style={{
+          margin: "0 0 4px",
+          fontSize: 19,
+          fontWeight: 800,
+          color: "#0f172a",
+          letterSpacing: "-0.3px",
+        }}
+      >
+        {proj.name}
+      </p>
+
+      {/* 부제 */}
+      <p
+        style={{
+          margin: "0 0 14px",
+          fontSize: 11,
+          color: ACCENT,
+          fontWeight: 500,
+          lineHeight: 1.5,
+        }}
+      >
+        {proj.subtitle}
+      </p>
+
+      {/* 태그 */}
+      <div
+        style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 0 }}
+      >
+        {proj.tags.map((t) => (
+          <span
+            key={t}
+            style={{
+              fontSize: 10,
+              background: "#f8fafc",
+              color: "#475569",
+              border: "1px solid #e2e8f0",
+              borderRadius: 99,
+              padding: "2px 9px",
+              fontFamily: MONO,
+            }}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* 카드 푸터 */}
+      <div
+        style={{
+          marginTop: 16,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <span
+          style={{
+            fontSize: 10,
+            fontFamily: MONO,
+            color: "#94a3b8",
+          }}
+        >
+          {proj.category}
+        </span>
+        <span
+          style={{
+            fontSize: 11,
+            fontFamily: MONO,
+            fontWeight: 700,
+            color: ACCENT,
+          }}
+        >
+          자세히 보기 ↓
+        </span>
+      </div>
+    </div>
+  );
+}
+
+
 /* ═══════════════════════════════════════════
    ABOUT
 ═══════════════════════════════════════════ */
