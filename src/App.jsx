@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 ═══════════════════════════════════════════ */
 const NAME = "강민서";
 const ROLE = "AX팀 AI 서비스 개발자 지원";
-const GITHUB = "https://github.com/mingioes";
+const GITHUB = "https://github.com/mingioes/mingioes.git";
 const AGE = "23세 (2004.01.15)";
 const PHONE = "010-9625-2212";
 const EMAIL = "vhehddl2212@naver.com";
@@ -60,16 +60,16 @@ const projects = [
     category: "다우기술 기업연계 산학협력 프로젝트",
     name: "뿌리오 AI 마케팅 솔루션",
     subtitle: "AI 이미지 생성 모델 기반의 MMS 마케팅 이미지 자동 생성 및 검증 시스템",
-    tags: ["DALL-E 3", "GPT-4", "Selenium", "프롬프트 엔지니어링"],
+    tags: ["DALL-E 3", "GPT-4", "Node.js", "React", "프롬프트 엔지니어링"],
     bullets: [
       "MMS 발송 규격 12개 항목(파일 용량, 해상도, 확장자 등) 검증 체크리스트 수립 및 시나리오 6종 설계",
-      "Selenium 기반의 자동화 테스트를 통해 규격 위반 가능성 3건(고해상도 이미지 처리 오류 등) 사전 발견 및 로직 개선",
+      "규격 위반 가능성 3건(고해상도 이미지 처리 오류 등)을 직접 테스트 시나리오로 사전 발견 및 로직 개선",
       "DALL-E 3 기반 생성 이미지 품질을 5점 척도로 정량화하여 업종별(음식, 패션 등) 품질 편차 분석",
       "특정 업종의 낮은 채도/구도 왜곡 패턴을 분석하여 '부정 프롬프트(Negative Prompt)' 및 가중치 로직 추가로 품질 표준화",
     ],
     star: [
       { label: "S", title: "실제 발송 가능한 AI 이미지 품질 및 규격 확보", body: "AI가 생성한 이미지가 통신사별 MMS 발송 규격(12개 항목)을 100% 충족해야 했으며, 업종별로 생성 품질이 일정하지 않은 문제를 해결해야 했습니다." },
-      { label: "A", title: "자동화 검증 체계 수립 및 데이터 기반 품질 개선", body: "Selenium을 활용해 전 단계 검증 시나리오를 자동화하고, 이미지 품질을 수치화하여 분석했습니다. 분석 결과를 바탕으로 프롬프트 로직을 고도화하여 최적의 생성 조건을 도출했습니다." },
+      { label: "A", title: "검증 체계 수립 및 데이터 기반 품질 개선", body: "직접 설계한 테스트 시나리오로 전 단계 검증을 수행하고, 이미지 품질을 수치화하여 분석했습니다. 분석 결과를 바탕으로 프롬프트 로직을 고도화하여 최적의 생성 조건을 도출했습니다." },
       { label: "R", title: "운영 리스크 제로화 및 생성 품질 상향 평준화", body: "규격 미달로 인한 발송 실패 리스크를 사전에 차단하였으며, 하위 품질 업종의 만족도를 데이터 기반 프롬프트 튜닝으로 대폭 개선했습니다." },
     ],
     archImg: "./ppurio.png",
@@ -83,14 +83,14 @@ const overviewProjects = [
     tags: ["Amazon Bedrock", "OpenSearch", "FastAPI", "RAG"], anchor: "project-01",
   },
   {
-    num: "02", period: "2024.09 – 2025.05", category: "Qualcomm 기업연계",
+    num: "02", period: "2025.02 – 2025.06", category: "Qualcomm 기업연계",
     name: "Wakey Wakey", subtitle: "Snapdragon NPU 기반 On-Device AI 스마트 앨범",
     tags: ["On-Device AI", "NPU 최적화", "이슈 트래킹"], anchor: "project-02",
   },
   {
     num: "03", period: "2024.09 – 2024.12", category: "다우기술 기업연계",
     name: "뿌리오 AI 솔루션", subtitle: "MMS 마케팅 이미지 자동 생성 및 검증 시스템",
-    tags: ["DALL-E 3", "GPT-4", "Selenium", "프롬프트 엔지니어링"], anchor: "project-03",
+    tags: ["DALL-E 3", "GPT-4", "Node.js", "React", "프롬프트 엔지니어링"], anchor: "project-03",
   },
 ];
 
@@ -110,6 +110,37 @@ const skills = [
   {
     icon: "🌐", title: "영어 커뮤니케이션",
     tags: [{ label: "Qualcomm 본사 직접 소통" }, { label: "영어 기술 문서 독해·작성" }, { label: "글로벌 파트너 조율" }],
+  },
+];
+
+const activities = [
+  {
+    icon: "💻",
+    color: ACCENT,
+    bgColor: "#eef2ff",
+    textColor: "#4338ca",
+    title: "POCS — 컴퓨터공학부 학술동아리",
+    subtitle: "알고리즘 스터디 · 주간 발표",
+    period: "2024.07 – 2025.02",
+    bullets: [
+      "한성대학교 컴퓨터공학부 학술동아리 POCS에서 매주 알고리즘 문제를 풀고 팀원들 앞에서 직접 발표하며 문제 해결 역량과 기술 커뮤니케이션 능력을 함께 키웠습니다.",
+      "정기적인 발표 경험을 통해 복잡한 알고리즘 로직을 간결하게 설명하는 능력을 훈련하였고, 이는 이후 Qualcomm 글로벌 기술 소통에서도 발휘됐습니다.",
+    ],
+    tags: ["알고리즘", "주간 발표", "기술 커뮤니케이션", "문제해결"],
+  },
+  {
+    icon: "☕",
+    color: "#1d9e75",
+    bgColor: "#e1f5ee",
+    textColor: "#0f6e56",
+    title: "매머드커피 영종하늘별빛점 — 파트타임",
+    subtitle: "바리스타 · 외국인 고객 응대",
+    period: "2024.07 – 2026.02",
+    bullets: [
+      "인천국제공항 인근 영종도에 위치한 특성상 외국인 손님 비율이 높은 환경에서 영어 고객 응대를 일상적으로 수행하며 실전 커뮤니케이션 역량을 강화했습니다.",
+      "카페 알바 경험이 없었음에도 하고자 하는 의지를 보여 합격하였으며, 이후 약 1년 8개월간 꾸준히 근무하며 책임감과 성실함을 증명했습니다.",
+    ],
+    tags: ["영어 고객 응대", "적극성", "서비스", "1년 8개월 근속"],
   },
 ];
 
@@ -557,6 +588,50 @@ function ProjectCard({ proj }) {
   );
 }
 
+function Activities() {
+  return (
+    <Section id="activities" bg="#fff">
+      <SectionHeading>Activities</SectionHeading>
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        {activities.map((a) => (
+          <div key={a.title} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 18, overflow: "hidden" }}>
+            <div style={{ display: "flex" }}>
+              <div style={{ width: 6, background: a.color, flexShrink: 0 }} />
+              <div style={{ padding: "28px 32px", flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                    <div style={{ width: 44, height: 44, borderRadius: 12, background: a.bgColor, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 22 }}>
+                      {a.icon}
+                    </div>
+                    <div>
+                      <p style={{ margin: "0 0 3px", fontSize: 17, fontWeight: 700, color: "#0f172a" }}>{a.title}</p>
+                      <p style={{ margin: 0, fontSize: 12, color: "#64748b" }}>{a.subtitle}</p>
+                    </div>
+                  </div>
+                  <span style={{ flexShrink: 0, fontSize: 11, fontFamily: MONO, background: a.bgColor, color: a.textColor, borderRadius: 8, padding: "4px 12px", whiteSpace: "nowrap" }}>{a.period}</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {a.bullets.map((b, i) => (
+                    <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                      <span style={{ flexShrink: 0, marginTop: 7, width: 5, height: 5, borderRadius: "50%", background: a.color, display: "block" }} />
+                      <p style={{ margin: 0, fontSize: 12.5, color: "#334155", lineHeight: 1.75 }}>{b}</p>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: "flex", gap: 7, flexWrap: "wrap", marginTop: 14 }}>
+                  {a.tags.map((t) => (
+                    <span key={t} style={{ fontSize: 10, background: "#f8fafc", color: "#475569", border: "1px solid #e2e8f0", borderRadius: 99, padding: "2px 9px", fontFamily: MONO }}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
@@ -627,7 +702,8 @@ export default function Portfolio() {
           {projects.map((p) => <ProjectCard key={p.num} proj={p} />)}
         </div>
       </Section>
-      <Contact />
+      <Activities />
+<Contact />
       <Footer />
     </div>
   );
