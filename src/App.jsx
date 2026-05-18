@@ -31,6 +31,7 @@ const projects = [
       { label: "R", title: "최신성 유지 및 분석 생산성 향상", body: "S3 동기화만으로 최신 정보를 즉시 반영하여 컷오프 문제를 해결했으며, 음악 산업 종사자의 리서치 시간을 대폭 절감할 수 있는 분석 기반을 마련했습니다." },
     ],
     archImg: "./rag.png",
+    links: [],
   },
   {
     num: "02",
@@ -53,6 +54,10 @@ const projects = [
     ],
     award: "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
     archImg: "./wakey.png",
+    links: [
+  { label: "Code", href: "https://github.com/HSU-Wakey" },
+  { label: "Demo", href: "https://youtu.be/GG55KUtXJIg?si=rRjBWRqHKjIGU76v" },
+],
   },
   {
     num: "03",
@@ -73,6 +78,9 @@ const projects = [
       { label: "R", title: "운영 리스크 제로화 및 생성 품질 상향 평준화", body: "규격 미달로 인한 발송 실패 리스크를 사전에 차단하였으며, 하위 품질 업종의 만족도를 데이터 기반 프롬프트 튜닝으로 대폭 개선했습니다." },
     ],
     archImg: "./ppurio.png",
+    links: [
+  { label: "Code", href: "https://github.com/SWPC-caffeine" },
+],
   },
 ];
 
@@ -537,9 +545,18 @@ function ProjectCard({ proj }) {
           <span style={{ fontSize: 24, fontWeight: 700, color: "#cbd5e1", fontFamily: MONO, letterSpacing: "-1px" }}>#{proj.num}</span>
           <span style={{ fontSize: 11, fontFamily: MONO, color: "#94a3b8" }}>{proj.period}</span>
           <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-            <a href={GITHUB} target="_blank" rel="noreferrer" style={{ fontSize: 11, fontWeight: 600, fontFamily: MONO, padding: "5px 13px", borderRadius: 7, textDecoration: "none", background: DARK, color: "#fff", border: `1.5px solid ${DARK}` }}>Code ↗</a>
-            <a href={GITHUB} target="_blank" rel="noreferrer" style={{ fontSize: 11, fontWeight: 600, fontFamily: MONO, padding: "5px 13px", borderRadius: 7, textDecoration: "none", background: "#fff", color: "#374151", border: "1.5px solid #d1d5db" }}>Demo ↗</a>
-          </div>
+  {proj.links.map((link) => (
+    <a key={link.label} href={link.href} target="_blank" rel="noreferrer" style={{
+      fontSize: 11, fontWeight: 600, fontFamily: MONO, padding: "5px 13px",
+      borderRadius: 7, textDecoration: "none",
+      ...(link.label === "Code"
+        ? { background: DARK, color: "#fff", border: `1.5px solid ${DARK}` }
+        : { background: "#fff", color: "#374151", border: "1.5px solid #d1d5db" }),
+    }}>
+      {link.label} ↗
+    </a>
+  ))}
+</div>
         </div>
         <p style={{ margin: "0 0 4px", fontSize: 10, fontFamily: MONO, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#94a3b8" }}>{proj.category}</p>
         <p style={{ margin: "0 0 4px", fontSize: 28, fontWeight: 800, color: "#0f172a", letterSpacing: "-0.5px" }}>{proj.name}</p>
