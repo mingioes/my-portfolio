@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
    DATA
 ═══════════════════════════════════════════ */
 const NAME = "강민서";
-const ROLE = "AX팀 AI 서비스 개발자 지원";
+const ROLE = "AI Agent · AX 서비스 개발자";
 const GITHUB = "https://github.com/mingioes/mingioes.git";
 const AGE = "23세 (2004.01.15)";
 const PHONE = "010-9625-2212";
