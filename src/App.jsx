@@ -247,11 +247,11 @@ function Hero() {
   ];
 
   return (
-    <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", fontFamily: FF }}>
+    <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", fontFamily: FF }}>
       {/* 왼쪽: 흰 배경 */}
       <div style={{
         background: "#fff", display: "flex", flexDirection: "column", justifyContent: "center",
-        padding: "100px 48px 64px 120px", borderRight: "1px solid #f1f5f9",
+        padding: "100px 48px 64px 64px", borderRight: "1px solid #f1f5f9",
       }}>
         {/* 증명사진 */}
         <div style={{
@@ -566,7 +566,7 @@ function ProjectCard({ proj }) {
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "1px solid #f1f5f9" }}>
-        <div style={{ padding: "24px 32px", background: "#fafbfc" }}>
+        <div style={{ padding: "28px 28px 28px 32px", background: "#fafbfc" }}>
           <p style={{ margin: "0 0 12px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3b8" }}>주요 기여</p>
           {proj.bullets.map((b, i) => (
             <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
@@ -575,7 +575,7 @@ function ProjectCard({ proj }) {
             </div>
           ))}
         </div>
-        <div style={{ padding: "24px 32px", borderLeft: "1px solid #f1f5f9", display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ padding: "28px 32px 28px 28px", borderLeft: "1px solid #f1f5f9", display: "flex", flexDirection: "column", gap: 12 }}>
           {proj.star.map((s) => (
             <div key={s.label} style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 12, padding: "14px 16px", flex: 1 }}>
               <StarBadge label={s.label} />
