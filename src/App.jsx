@@ -55,11 +55,11 @@ const projects = [
     award: "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
     archImg: "./wakey.png",
     links: [
-  { label: "Code", href: "https://github.com/HSU-Wakey" },
-  { label: "Demo", href: "https://youtu.be/GG55KUtXJIg?si=rRjBWRqHKjIGU76v" },
-],
+      { label: "Code", href: "https://github.com/HSU-Wakey" },
+      { label: "Demo", href: "https://youtu.be/GG55KUtXJIg?si=rRjBWRqHKjIGU76v" },
+    ],
   },
- {
+  {
     num: "03",
     period: "2024.09 – 2024.12",
     category: "다우기술 기업연계 산학협력 프로젝트",
@@ -123,7 +123,7 @@ const skills = [
 const activities = [
   {
     icon: "💻",
-    color: ACCENT,
+    color: "#4f7bff",
     bgColor: "#eef2ff",
     textColor: "#4338ca",
     title: "POCS — 컴퓨터공학부 학술동아리",
@@ -194,6 +194,113 @@ function StarBadge({ label }) {
   );
 }
 
+function ArchImage({ src, name }) {
+  const [hovered, setHovered] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div style={{ borderTop: "1px solid #e2e8f0", padding: "22px 32px 26px" }}>
+        <p style={{ margin: "0 0 12px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3b8" }}>시스템 구조도</p>
+        <div
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onClick={() => setOpen(true)}
+          style={{
+            borderRadius: 12, overflow: "hidden",
+            border: `1px solid ${hovered ? "#a5b4fc" : "#e2e8f0"}`,
+            background: "#f8fafc", cursor: "zoom-in", position: "relative",
+            boxShadow: hovered ? "0 6px 24px rgba(79,123,255,0.15)" : "none",
+            transform: hovered ? "scale(1.01)" : "scale(1)",
+            transition: "all 0.22s ease",
+          }}
+        >
+          <img
+            src={src}
+            alt={`${name} 구조도`}
+            style={{ width: "100%", height: "auto", display: "block", maxHeight: 340, objectFit: "contain" }}
+          />
+          {hovered && (
+            <div style={{
+              position: "absolute", inset: 0, background: "rgba(79,123,255,0.08)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              borderRadius: 12,
+            }}>
+              <div style={{
+                background: "rgba(15,23,42,0.72)", color: "#fff", borderRadius: 99,
+                padding: "8px 18px", fontSize: 12, fontFamily: MONO, fontWeight: 600,
+                backdropFilter: "blur(6px)", display: "flex", alignItems: "center", gap: 6,
+              }}>
+                🔍 클릭해서 크게 보기
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* 모달 */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 1000,
+            background: "rgba(10,14,26,0.85)", backdropFilter: "blur(10px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "32px", cursor: "zoom-out",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ position: "relative", maxWidth: "90vw", maxHeight: "88vh", cursor: "default" }}
+          >
+            <img
+              src={src}
+              alt={`${name} 구조도`}
+              style={{ width: "100%", height: "auto", maxHeight: "82vh", objectFit: "contain", borderRadius: 16, display: "block" }}
+            />
+            <button
+              onClick={() => setOpen(false)}
+              style={{
+                position: "absolute", top: -14, right: -14,
+                width: 36, height: 36, borderRadius: "50%",
+                background: "#1e293b", border: "1.5px solid #334155",
+                color: "#94a3b8", fontSize: 16, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: hovered ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.06)",
+        border: `1px solid ${hovered ? "rgba(79,123,255,0.6)" : "rgba(255,255,255,0.1)"}`,
+        borderRadius: 16, padding: "18px", backdropFilter: "blur(8px)",
+        transition: "all 0.22s ease",
+        boxShadow: hovered ? "0 0 18px rgba(79,123,255,0.18)" : "none",
+        transform: hovered ? "translateY(-2px)" : "none",
+        cursor: "default",
+      }}
+    >
+      <div style={{ fontSize: 22, marginBottom: 8 }}>{c.icon}</div>
+      <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 4, lineHeight: 1.3 }}>{c.label}</div>
+      <div style={{ fontSize: 11, color: hovered ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.45)", fontFamily: MONO, lineHeight: 1.4, transition: "color 0.22s" }}>{c.sub}</div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════
    NAVBAR
 ═══════════════════════════════════════════ */
@@ -235,6 +342,8 @@ function Navbar({ scrolled }) {
 
 /* ═══════════════════════════════════════════
    HERO
+   FIX: 왼쪽 콘텐츠를 maxWidth + margin auto로 중앙 정렬
+        → padding-left 고정값 대신 내부에 wrapper를 씌워 자연스럽게 가운데 정렬
 ═══════════════════════════════════════════ */
 function Hero() {
   const competencies = [
@@ -247,84 +356,94 @@ function Hero() {
   ];
 
   return (
-    <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", fontFamily: FF }}>
-      {/* 왼쪽: 흰 배경 */}
+    <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", fontFamily: FF }}>
+      {/* ── 왼쪽: 흰 배경
+          핵심 수정: padding을 좌우 동일하게 주고, 내부 콘텐츠를 maxWidth로 묶어
+          어느 화면 너비에서도 치우치지 않도록 함 */}
       <div style={{
-        background: "#fff", display: "flex", flexDirection: "column", justifyContent: "center",
-        padding: "100px 48px 64px 64px", borderRight: "1px solid #f1f5f9",
+        background: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",          /* 가로 중앙 */
+        padding: "100px 40px 64px",    /* 좌우 동일 패딩 */
+        borderRight: "1px solid #f1f5f9",
       }}>
-        {/* 증명사진 */}
-        <div style={{
-          width: 200, height: 252, borderRadius: 18, overflow: "hidden",
-          background: "#f1f5f9", border: "1px solid #e2e8f0", marginBottom: 28, flexShrink: 0,
-        }}>
-          <img src="./IMG_2124.jpg" alt="강민서 증명사진"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-        </div>
-
-        {/* 직군 뱃지 */}
-        <div style={{
-          display: "inline-block", width: "fit-content", marginBottom: 14,
-          fontSize: 13, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.05em",
-          color: ACCENT, background: "#eef2ff", border: "1px solid #c7d2fe",
-          borderRadius: 99, padding: "7px 18px",
-        }}>
-          {ROLE}
-        </div>
-
-        {/* 이름 */}
-        <h1 style={{ fontSize: 56, fontWeight: 800, color: "#0f172a", margin: "0 0 28px", letterSpacing: "-2px", lineHeight: 1.05 }}>
-          {NAME}
-        </h1>
-
-        {/* 신상정보 */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 40 }}>
-          {[
-            { icon: "🎂", label: "나이", val: AGE },
-            { icon: "📱", label: "연락처", val: PHONE },
-            { icon: "✉️", label: "이메일", val: EMAIL },
-          ].map((item) => (
-            <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{
-                width: 34, height: 34, borderRadius: 9, background: "#f8fafc",
-                border: "1px solid #e2e8f0", display: "flex", alignItems: "center",
-                justifyContent: "center", fontSize: 15, flexShrink: 0,
-              }}>
-                {item.icon}
-              </div>
-              <div>
-                <div style={{ fontSize: 9, fontFamily: MONO, color: "#94a3b8", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 1 }}>
-                  {item.label}
-                </div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", fontFamily: MONO }}>
-                  {item.val}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div style={{ display: "flex", gap: 10 }}>
-          <button onClick={() => scrollTo("projects")} style={{
-            background: ACCENT, color: "#fff", border: "none", cursor: "pointer",
-            fontFamily: MONO, fontWeight: 700, fontSize: 12, padding: "11px 22px", borderRadius: 9,
+        {/* 실제 콘텐츠 wrapper — 너비 고정으로 왼쪽 정렬 유지하되 컨테이너가 중앙 */}
+        <div style={{ width: "100%", maxWidth: 340 }}>
+          {/* 증명사진 */}
+          <div style={{
+            width: 200, height: 252, borderRadius: 18, overflow: "hidden",
+            background: "#f1f5f9", border: "1px solid #e2e8f0", marginBottom: 28, flexShrink: 0,
           }}>
-            프로젝트 보기 ↓
-          </button>
-          <a href={GITHUB} target="_blank" rel="noreferrer" style={{
-            background: "#fff", color: "#374151", border: "1.5px solid #d1d5db",
-            borderRadius: 9, fontFamily: MONO, fontWeight: 600, fontSize: 12,
-            padding: "11px 22px", textDecoration: "none", display: "inline-block",
+            <img src="./IMG_2124.jpg" alt="강민서 증명사진"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </div>
+
+          {/* 직군 뱃지 */}
+          <div style={{
+            display: "inline-block", width: "fit-content", marginBottom: 14,
+            fontSize: 13, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.05em",
+            color: ACCENT, background: "#eef2ff", border: "1px solid #c7d2fe",
+            borderRadius: 99, padding: "7px 18px",
           }}>
-            GitHub ↗
-          </a>
+            {ROLE}
+          </div>
+
+          {/* 이름 */}
+          <h1 style={{ fontSize: 56, fontWeight: 800, color: "#0f172a", margin: "0 0 28px", letterSpacing: "-2px", lineHeight: 1.05 }}>
+            {NAME}
+          </h1>
+
+          {/* 신상정보 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 40 }}>
+            {[
+              { icon: "🎂", label: "나이", val: AGE },
+              { icon: "📱", label: "연락처", val: PHONE },
+              { icon: "✉️", label: "이메일", val: EMAIL },
+            ].map((item) => (
+              <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{
+                  width: 34, height: 34, borderRadius: 9, background: "#f8fafc",
+                  border: "1px solid #e2e8f0", display: "flex", alignItems: "center",
+                  justifyContent: "center", fontSize: 15, flexShrink: 0,
+                }}>
+                  {item.icon}
+                </div>
+                <div>
+                  <div style={{ fontSize: 9, fontFamily: MONO, color: "#94a3b8", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 1 }}>
+                    {item.label}
+                  </div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", fontFamily: MONO }}>
+                    {item.val}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div style={{ display: "flex", gap: 10 }}>
+            <button onClick={() => scrollTo("projects")} style={{
+              background: ACCENT, color: "#fff", border: "none", cursor: "pointer",
+              fontFamily: MONO, fontWeight: 700, fontSize: 12, padding: "11px 22px", borderRadius: 9,
+            }}>
+              프로젝트 보기 ↓
+            </button>
+            <a href={GITHUB} target="_blank" rel="noreferrer" style={{
+              background: "#fff", color: "#374151", border: "1.5px solid #d1d5db",
+              borderRadius: 9, fontFamily: MONO, fontWeight: 600, fontSize: 12,
+              padding: "11px 22px", textDecoration: "none", display: "inline-block",
+            }}>
+              GitHub ↗
+            </a>
+          </div>
         </div>
       </div>
 
       {/* 오른쪽: 다크 배경 + 역량 카드 */}
       <div style={{
-        background: `linear-gradient(135deg, #060b18 0%, #0d1535 25%, #1e1b4b 55%, #0f172a 80%, #020408 100%)`,
+        background: "linear-gradient(135deg, #060b18 0%, #0d1535 25%, #1e1b4b 55%, #0f172a 80%, #020408 100%)",
         display: "flex", flexDirection: "column", justifyContent: "center",
         padding: "100px 56px 64px", position: "relative", overflow: "hidden",
       }}>
@@ -338,14 +457,7 @@ function Hero() {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, zIndex: 1 }}>
           {competencies.map((c) => (
-            <div key={c.label} style={{
-              background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: 16, padding: "18px", backdropFilter: "blur(8px)", transition: "background 0.2s",
-            }}>
-              <div style={{ fontSize: 22, marginBottom: 8 }}>{c.icon}</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 4, lineHeight: 1.3 }}>{c.label}</div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", fontFamily: MONO, lineHeight: 1.4 }}>{c.sub}</div>
-            </div>
+            <CompetencyCard key={c.label} c={c} />
           ))}
         </div>
 
@@ -431,7 +543,7 @@ function OverviewCard({ proj }) {
 ═══════════════════════════════════════════ */
 function Section({ id, bg, children }) {
   return (
-    <section id={id} style={{ background: bg || "#f8fafc", borderTop: "1px solid #f1f5f9" }}>
+    <section id={id} style={{ background: bg || "#f8fafc", borderTop: "1px solid #d1d5db" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "96px 40px 88px" }}>
         {children}
       </div>
@@ -535,29 +647,31 @@ function Skills() {
 
 /* ═══════════════════════════════════════════
    PROJECT CARD
+   FIX: 좌우 패딩 완전 통일(32px), 배경색 통일(#fff),
+        구분선만 borderLeft로 유지
 ═══════════════════════════════════════════ */
 function ProjectCard({ proj }) {
   return (
-    <div id={`project-${proj.num}`} style={{ background: "#edf0f7", border: "1px solid #e2e8f0", borderRadius: 20, overflow: "hidden" }}>
+    <div id={`project-${proj.num}`} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 20, overflow: "hidden" }}>
       <div style={{ padding: "32px 36px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
-          <span style={{ fontSize: 24, fontWeight: 700, color: "#cbd5e1", fontFamily: MONO, letterSpacing: "-1px" }}>#{proj.num}</span>
+          <span style={{ fontSize: 24, fontWeight: 700, color: "#64748b", fontFamily: MONO, letterSpacing: "-1px" }}>#{proj.num}</span>
           <span style={{ fontSize: 11, fontFamily: MONO, color: "#94a3b8" }}>{proj.period}</span>
           <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-  {proj.links.map((link) => (
-    <a key={link.label} href={link.href} target="_blank" rel="noreferrer" style={{
-      fontSize: 11, fontWeight: 600, fontFamily: MONO, padding: "5px 13px",
-      borderRadius: 7, textDecoration: "none",
-      ...(link.label === "Code"
-        ? { background: DARK, color: "#fff", border: `1.5px solid ${DARK}` }
-        : { background: "#fff", color: "#374151", border: "1.5px solid #d1d5db" }),
-    }}>
-      {link.label} ↗
-    </a>
-  ))}
-</div>
+            {proj.links.map((link) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noreferrer" style={{
+                fontSize: 11, fontWeight: 600, fontFamily: MONO, padding: "5px 13px",
+                borderRadius: 7, textDecoration: "none",
+                ...(link.label === "Code"
+                  ? { background: DARK, color: "#fff", border: `1.5px solid ${DARK}` }
+                  : { background: "#fff", color: "#374151", border: "1.5px solid #d1d5db" }),
+              }}>
+                {link.label} ↗
+              </a>
+            ))}
+          </div>
         </div>
-        <p style={{ margin: "0 0 4px", fontSize: 10, fontFamily: MONO, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "#94a3b8" }}>{proj.category}</p>
+        <p style={{ margin: "0 0 6px", fontSize: 12, fontFamily: FF, fontWeight: 600, letterSpacing: "0.02em", color: "#475569" }}>{proj.category}</p>
         <p style={{ margin: "0 0 4px", fontSize: 28, fontWeight: 800, color: "#0f172a", letterSpacing: "-0.5px" }}>{proj.name}</p>
         <p style={{ margin: "0 0 18px", fontSize: 13, color: ACCENT, fontWeight: 500 }}>{proj.subtitle}</p>
         <div style={{ display: "flex", gap: 7, flexWrap: "wrap" }}>
@@ -565,19 +679,27 @@ function ProjectCard({ proj }) {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "1px solid #f1f5f9" }}>
-        <div style={{ padding: "28px 28px 28px 32px", background: "#fafbfc" }}>
-          <p style={{ margin: "0 0 12px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3b8" }}>주요 기여</p>
+      {/* ── 주요기여 / STAR 영역
+          핵심 수정:
+          - 양쪽 padding 모두 "32px" 로 통일
+          - 왼쪽 background를 "#fff" 로 통일 (기존 #fafbfc 제거)
+          - 구분은 borderLeft 만으로 처리
+          - 카드 전체 배경이 #fff 이므로 시각적으로 균일하게 보임 */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "1px solid #e2e8f0" }}>
+        {/* 왼쪽: 주요 기여 */}
+        <div style={{ padding: "28px 32px", background: "#fff" }}>
+          <p style={{ margin: "0 0 14px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3b8" }}>주요 기여</p>
           {proj.bullets.map((b, i) => (
             <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
-              <span style={{ flexShrink: 0, marginTop: 3, width: 5, height: 5, borderRadius: "50%", background: ACCENT, display: "block" }} />
+              <span style={{ flexShrink: 0, marginTop: 7, width: 5, height: 5, borderRadius: "50%", background: ACCENT, display: "block" }} />
               <p style={{ margin: 0, fontSize: 12.5, color: "#334155", lineHeight: 1.75 }}>{b}</p>
             </div>
           ))}
         </div>
-        <div style={{ padding: "28px 32px 28px 28px", borderLeft: "1px solid #f1f5f9", display: "flex", flexDirection: "column", gap: 12 }}>
+        {/* 오른쪽: STAR */}
+        <div style={{ padding: "28px 32px", background: "#f8fafc", borderLeft: "1px solid #e2e8f0", display: "flex", flexDirection: "column", gap: 12 }}>
           {proj.star.map((s) => (
-            <div key={s.label} style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 12, padding: "14px 16px", flex: 1 }}>
+            <div key={s.label} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: "14px 16px", flex: 1 }}>
               <StarBadge label={s.label} />
               <p style={{ margin: "0 0 5px", fontSize: 12, fontWeight: 700, color: "#0f172a" }}>{s.title}</p>
               <p style={{ margin: 0, fontSize: 11.5, color: "#475569", lineHeight: 1.7 }}>{s.body}</p>
@@ -587,12 +709,7 @@ function ProjectCard({ proj }) {
       </div>
 
       {proj.archImg && (
-        <div style={{ borderTop: "1px solid #f1f5f9", padding: "22px 32px 26px" }}>
-          <p style={{ margin: "0 0 12px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3b8" }}>시스템 구조도</p>
-          <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #e2e8f0", background: "#f8fafc" }}>
-            <img src={proj.archImg} alt={`${proj.name} 구조도`} style={{ width: "100%", height: "auto", display: "block", maxHeight: 340, objectFit: "contain" }} />
-          </div>
-        </div>
+        <ArchImage src={proj.archImg} name={proj.name} />
       )}
 
       {proj.award && (
@@ -604,6 +721,9 @@ function ProjectCard({ proj }) {
   );
 }
 
+/* ═══════════════════════════════════════════
+   ACTIVITIES
+═══════════════════════════════════════════ */
 function Activities() {
   return (
     <Section id="activities" bg="#ffffff">
@@ -712,14 +832,14 @@ export default function Portfolio() {
       <ProjectsOverview />
       <About />
       <Skills />
-      <Section id="projects" bg="#f8fafc">
+      <Section id="projects" bg="#edf0f7">
         <SectionHeading>Projects</SectionHeading>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           {projects.map((p) => <ProjectCard key={p.num} proj={p} />)}
         </div>
       </Section>
       <Activities />
-<Contact />
+      <Contact />
       <Footer />
     </div>
   );
