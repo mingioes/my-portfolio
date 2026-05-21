@@ -324,11 +324,11 @@ function Hero() {
 
       {/* 오른쪽: 다크 배경 + 역량 카드 */}
       <div style={{
-        background: `linear-gradient(145deg, ${DARK} 0%, #1e1b4b 60%, #0f172a 100%)`,
+        background: `linear-gradient(135deg, #060b18 0%, #0d1535 25%, #1e1b4b 55%, #0f172a 80%, #020408 100%)`,
         display: "flex", flexDirection: "column", justifyContent: "center",
         padding: "100px 56px 64px", position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", top: "10%", right: "-5%", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle,rgba(79,123,255,.15) 0%,transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "10%", right: "-5%", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle,rgba(79,123,255,.28) 0%,rgba(129,140,248,0.12) 40%,transparent 70%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: "8%", left: "-5%", width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle,rgba(129,140,248,.10) 0%,transparent 65%)", pointerEvents: "none" }} />
 
         <p style={{ margin: "0 0 10px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(79,123,255,.8)", zIndex: 1 }}>
@@ -368,7 +368,7 @@ function Hero() {
 ═══════════════════════════════════════════ */
 function ProjectsOverview() {
   return (
-    <section style={{ background: "#f8fafc", borderTop: "1px solid #f1f5f9" }}>
+    <section style={{ background: "#f8fafc", borderTop: "1px solid #d1d5db" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "72px 40px 80px" }}>
         <div style={{ marginBottom: 36 }}>
           <p style={{ margin: "0 0 8px", fontSize: 11, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: ACCENT }}>
@@ -459,7 +459,7 @@ function About() {
   const Dot = () => <span style={{ display: "inline-block", width: 3, height: 13, background: ACCENT, borderRadius: 2 }} />;
 
   return (
-    <Section id="about" bg="#f8fafc">
+    <Section id="about" bg="#edf0f7">
       <SectionHeading>About</SectionHeading>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr 1.5fr", gap: 18 }}>
         <div style={cardBase}>
@@ -516,7 +516,7 @@ function About() {
 ═══════════════════════════════════════════ */
 function Skills() {
   return (
-    <Section id="skills" bg="#fff">
+    <Section id="skills" bg="#ffffff">
       <SectionHeading>Skills</SectionHeading>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
         {skills.map((s) => (
@@ -538,7 +538,7 @@ function Skills() {
 ═══════════════════════════════════════════ */
 function ProjectCard({ proj }) {
   return (
-    <div id={`project-${proj.num}`} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 20, overflow: "hidden" }}>
+    <div id={`project-${proj.num}`} style={{ background: "#edf0f7", border: "1px solid #e2e8f0", borderRadius: 20, overflow: "hidden" }}>
       <div style={{ padding: "32px 36px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
           <span style={{ fontSize: 24, fontWeight: 700, color: "#cbd5e1", fontFamily: MONO, letterSpacing: "-1px" }}>#{proj.num}</span>
@@ -606,7 +606,7 @@ function ProjectCard({ proj }) {
 
 function Activities() {
   return (
-    <Section id="activities" bg="#fff">
+    <Section id="activities" bg="#ffffff">
       <SectionHeading>Activities</SectionHeading>
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         {activities.map((a) => (
@@ -657,7 +657,7 @@ function Contact() {
     { icon: "✉️", label: "Email", val: EMAIL, href: `mailto:${EMAIL}` },
   ];
   return (
-    <Section id="contact" bg="#f8fafc">
+    <Section id="contact" bg="#edf0f7">
       <SectionHeading>Contact</SectionHeading>
       <p style={{ margin: "0 0 36px", fontSize: 15, color: "#475569", lineHeight: 1.8 }}>
         새로운 기회나 협업 제안은 언제나 환영합니다.<br />
