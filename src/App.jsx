@@ -19,7 +19,7 @@ const projects = [
     subtitle: "Snapdragon 8 Gen 3 NPU 기반 On-Device AI 스마트 앨범",
     tags: ["On-Device AI", "TFLite", "ONNX", "NPU 최적화", "이슈 트래킹", "글로벌 협업"],
     bullets: [
-      "여행·일상 기록 시 사진과 함께 음성 메모를 남기는 기능을 위해 Whisper 기반 온디바이스 음성 인식 파이프라인 구현 및 성능 검증 완료",
+      "여행 발자취 기록용 음성 메모 기능 구현을 위해 Whisper 기반 온디바이스 음성 인식 기능을 적용하고 실제 디바이스 동작 검증 완료 (최종 앱 미반영)",
       "MobileNet · YOLOv8 영어 추론 결과를 자연어 응답으로 변환하기 위해 LLM 연동 구조 설계 및 ONNX 변환 실험 진행",
       "Qualcomm AI Hub 기반 ESRGAN 모델 온디바이스 환경 통합, NPU 파라미터 튜닝으로 이미지 업스케일링 품질 최적화",
       "SDK 호환성 이슈 10여 건을 4단계 트래킹 프로세스로 체계화 → 팀 공유 문서 관리, 중복 오류 0건",
@@ -30,7 +30,7 @@ const projects = [
     ],
     star: [
       { label: "S", title: "해결해야 했던 과제", body: "음성 인식, 이미지 탐지, 자연어 검색 등 여러 AI 모델을 온디바이스 환경에 통합하는 과정에서 SDK 버전별 NPU 호환성 오류와 모델별 추론 지연 문제가 반복 발생했습니다." },
-      { label: "A", title: "추론 파이프라인 설계 & 모델 최적화", body: "음성 인식(Whisper), 객체 탐지(YOLOv8·MobileNet), 이미지 업스케일링(ESRGAN) 모델을 Snapdragon 8 Gen 3 NPU에 최적화하며 추론 파이프라인을 설계했습니다. NPU 파라미터 튜닝과 CLIP 기반 프롬프트 엔지니어링으로 품질을 반복 개선했고, 10여 건의 호환성 이슈는 4단계 트래킹 체계로 관리하며 Qualcomm 본사에 영어로 질의해 해결했습니다." },
+      { label: "A", title: "추론 파이프라인 설계 & 모델 최적화", body: "객체 탐지(YOLOv8·MobileNet)와 이미지 업스케일링(ESRGAN) 모델을 Snapdragon 8 Gen 3 환경에 적용하며 추론 파이프라인을 설계했습니다. 음성 메모 기능 구현을 위해 Whisper 기반 음성 인식도 검토 및 적용했습니다. NPU 파라미터 튜닝과 CLIP 기반 프롬프트 엔지니어링으로 품질을 반복 개선했고, 10여 건의 호환성 이슈는 4단계 트래킹 체계로 관리하며 Qualcomm 본사에 영어로 질의해 해결했습니다." },
       { label: "R", title: "수치로 검증한 성능 개선", body: "객체 탐지 정확도 약 40% 향상, 이미지 검색 응답속도 약 20% 단축. 여러 모델을 하나의 온디바이스 추론 파이프라인으로 통합 운영하며 측정·개선·재측정 사이클을 체화했습니다." },
     ],
     award: "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
@@ -349,7 +349,7 @@ function Navbar({ scrolled }) {
 function Hero() {
   const competencies = [
     { icon: "🤖", label: "RAG 시스템 설계", sub: "Amazon Bedrock · OpenSearch" },
-    { icon: "⚡", label: "On-Device AI 최적화", sub: "TFLite · ONNX · NPU 튜닝" },
+    { icon: "⚡", label: "On-Device AI 통합", sub: "TFLite · ONNX · NPU 튜닝" },
     { icon: "✍️", label: "Prompt Engineering", sub: "품질 측정 · 편차 개선" },
     { icon: "☁️", label: "AWS 클라우드", sub: "S3 · Lambda · Bedrock" },
     { icon: "🔍", label: "이슈 트래킹", sub: "4단계 체계 · 리스크 차단" },
