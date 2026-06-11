@@ -13,6 +13,35 @@ const EMAIL = "vhehddl2212@naver.com";
 const projects = [
   {
     num: "01",
+    period: "2024.09 – 2025.05",
+    category: "Qualcomm 기업연계 캡스톤",
+    name: "Wakey Wakey",
+    subtitle: "Snapdragon 8 Gen 3 NPU 기반 On-Device AI 스마트 앨범",
+    tags: ["On-Device AI", "TFLite", "ONNX", "NPU 최적화", "이슈 트래킹", "글로벌 협업"],
+    bullets: [
+      "여행·일상 기록 시 사진과 함께 음성 메모를 남기는 기능을 위해 Whisper 기반 온디바이스 음성 인식 파이프라인 구현 및 성능 검증 완료",
+      "MobileNet · YOLOv8 영어 추론 결과를 자연어 응답으로 변환하기 위해 LLM 연동 구조 설계 및 ONNX 변환 실험 진행",
+      "Qualcomm AI Hub 기반 ESRGAN 모델 온디바이스 환경 통합, NPU 파라미터 튜닝으로 이미지 업스케일링 품질 최적화",
+      "SDK 호환성 이슈 10여 건을 4단계 트래킹 프로세스로 체계화 → 팀 공유 문서 관리, 중복 오류 0건",
+      "Qualcomm 본사 엔지니어와 영어 슬랙 채널로 기술 질의·요구사항 조율",
+      "NPU 파라미터 튜닝으로 객체 탐지 정확도 기존 대비 약 40% 이상 향상 — 매 변경마다 수치 검증",
+      "벡터 DB 인덱싱 구조 개선으로 이미지 검색 응답 속도 약 20% 단축",
+      "공동창업 경험 기반: 사용자 설문 직접 설계 → 자연어 검색 모델 개선 반영, 최종 발표에서 중소기업 대표들 출시 일정 문의",
+    ],
+    star: [
+      { label: "S", title: "해결해야 했던 과제", body: "음성 인식, 이미지 탐지, 자연어 검색 등 여러 AI 모델을 온디바이스 환경에 통합하는 과정에서 SDK 버전별 NPU 호환성 오류와 모델별 추론 지연 문제가 반복 발생했습니다." },
+      { label: "A", title: "추론 파이프라인 설계 & 모델 최적화", body: "음성 인식(Whisper), 객체 탐지(YOLOv8·MobileNet), 이미지 업스케일링(ESRGAN) 모델을 Snapdragon 8 Gen 3 NPU에 최적화하며 추론 파이프라인을 설계했습니다. NPU 파라미터 튜닝과 CLIP 기반 프롬프트 엔지니어링으로 품질을 반복 개선했고, 10여 건의 호환성 이슈는 4단계 트래킹 체계로 관리하며 Qualcomm 본사에 영어로 질의해 해결했습니다." },
+      { label: "R", title: "수치로 검증한 성능 개선", body: "객체 탐지 정확도 약 40% 향상, 이미지 검색 응답속도 약 20% 단축. 여러 모델을 하나의 온디바이스 추론 파이프라인으로 통합 운영하며 측정·개선·재측정 사이클을 체화했습니다." },
+    ],
+    award: "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
+    archImg: "./wakey.png",
+    links: [
+      { label: "Code", href: "https://github.com/HSU-Wakey" },
+      { label: "Demo", href: "https://youtu.be/GG55KUtXJIg?si=rRjBWRqHKjIGU76v" },
+    ],
+  },
+  {
+    num: "02",
     period: "2025.11 – 2025.12",
     category: "산학협력 프로젝트 (GS 네오텍 멘토링) · AWS 클라우드",
     name: "MusicRAG",
@@ -32,32 +61,6 @@ const projects = [
     ],
     archImg: "./rag.png",
     links: [],
-  },
-  {
-    num: "02",
-    period: "2024.09 – 2025.05",
-    category: "Qualcomm 기업연계 캡스톤",
-    name: "Wakey Wakey",
-    subtitle: "Snapdragon 8 Gen 3 NPU 기반 On-Device AI 스마트 앨범",
-    tags: ["글로벌 협업", "이슈 트래킹", "AI 성능 최적화", "데이터 기반 검증"],
-    bullets: [
-      "SDK 호환성 이슈 10여 건을 4단계 트래킹 프로세스로 체계화 → 팀 공유 문서 관리, 중복 오류 0건",
-      "Qualcomm 본사 엔지니어와 영어 슬랙 채널로 기술 질의·요구사항 조율",
-      "NPU 파라미터 튜닝으로 객체 탐지 정확도 기존 대비 약 40% 이상 향상 — 매 변경마다 수치 검증",
-      "벡터 DB 인덱싱 구조 개선으로 이미지 검색 응답 속도 약 20% 단축",
-      "공동창업 경험 기반: 사용자 설문 직접 설계 → 자연어 검색 모델 개선 반영, 최종 발표에서 중소기업 대표들 출시 일정 문의",
-    ],
-    star: [
-      { label: "S", title: "해결해야 했던 과제", body: "SDK 버전마다 다른 NPU 호환성 오류, 국내 레퍼런스 부재, 팀 내 중복 오류 발생 문제가 반복됐습니다." },
-      { label: "A", title: "이슈 트래킹 체계 설계 & 글로벌 소통", body: "10여 건 이슈를 재현 → 로그 정리 → 해결책 검증 3단계로 체계화하고 노션에 누적 관리. 내부 해결 불가 이슈는 Qualcomm 본사에 영어로 직접 질의했습니다." },
-      { label: "R", title: "데이터로 성능 지표 측정·개선", body: "'측정 → 개선 → 재측정' 반복 사이클로 협력사 운영 지표 관리 방법론을 체화했습니다. 최종 발표에서 중소기업 대표들로부터 출시 일정을 묻는 반응을 받았습니다." },
-    ],
-    award: "🏆 기업연계형 캡스톤 디자인 최우수상 (한성대학교, 2025.05) · 한국통신학회 학부생 캡스톤 경진대회 우수상 (2025.11)",
-    archImg: "./wakey.png",
-    links: [
-      { label: "Code", href: "https://github.com/HSU-Wakey" },
-      { label: "Demo", href: "https://youtu.be/GG55KUtXJIg?si=rRjBWRqHKjIGU76v" },
-    ],
   },
   {
     num: "03",
@@ -85,14 +88,14 @@ const projects = [
 
 const overviewProjects = [
   {
-    num: "01", period: "2025.11 – 2025.12", category: "산학협력 · AWS",
-    name: "MusicRAG", subtitle: "RAG 기반 지능형 음악 정보 검색 및 분석 시스템",
-    tags: ["Amazon Bedrock", "OpenSearch", "FastAPI", "RAG"], anchor: "project-01",
+    num: "01", period: "2024.09 – 2025.05", category: "Qualcomm 기업연계",
+    name: "Wakey Wakey", subtitle: "Snapdragon NPU 기반 On-Device AI 스마트 앨범",
+    tags: ["On-Device AI", "TFLite", "ONNX", "NPU 최적화", "이슈 트래킹"], anchor: "project-01",
   },
   {
-    num: "02", period: "2025.02 – 2025.06", category: "Qualcomm 기업연계",
-    name: "Wakey Wakey", subtitle: "Snapdragon NPU 기반 On-Device AI 스마트 앨범",
-    tags: ["On-Device AI", "NPU 최적화", "이슈 트래킹"], anchor: "project-02",
+    num: "02", period: "2025.11 – 2025.12", category: "산학협력 · AWS",
+    name: "MusicRAG", subtitle: "RAG 기반 지능형 음악 정보 검색 및 분석 시스템",
+    tags: ["Amazon Bedrock", "OpenSearch", "FastAPI", "RAG"], anchor: "project-02",
   },
   {
     num: "03", period: "2024.09 – 2024.12", category: "다우기술 기업연계",
@@ -111,12 +114,12 @@ const skills = [
     tags: [{ label: "AWS (S3·Lambda·Bedrock)", accent: true }, { label: "OpenSearch Serverless", accent: true }, { label: "Docker · Linux" }, { label: "FastAPI · Vue.js" }],
   },
   {
-    icon: "🔍", title: "이슈 트래킹",
-    tags: [{ label: "4단계 체계 설계·운영" }, { label: "이슈 문서화·공유" }, { label: "리스크 사전 차단" }, { label: "Notion 기반 협업" }],
+    icon: "⚡", title: "모델 최적화",
+    tags: [{ label: "TFLite", accent: true }, { label: "ONNX", accent: true }, { label: "NPU 파라미터 튜닝" }, { label: "모델 경량화" }],
   },
   {
-    icon: "🌐", title: "영어 커뮤니케이션",
-    tags: [{ label: "Qualcomm 본사 직접 소통" }, { label: "영어 기술 문서 독해·작성" }, { label: "글로벌 파트너 조율" }],
+    icon: "🔍", title: "이슈 트래킹",
+    tags: [{ label: "4단계 체계 설계·운영" }, { label: "이슈 문서화·공유" }, { label: "리스크 사전 차단" }, { label: "Notion 기반 협업" }],
   },
 ];
 
@@ -238,7 +241,6 @@ function ArchImage({ src, name }) {
         </div>
       </div>
 
-      {/* 모달 */}
       {open && (
         <div
           onClick={() => setOpen(false)}
@@ -279,6 +281,7 @@ function ArchImage({ src, name }) {
 }
 
 
+function CompetencyCard({ c }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
@@ -342,13 +345,11 @@ function Navbar({ scrolled }) {
 
 /* ═══════════════════════════════════════════
    HERO
-   FIX: 왼쪽 콘텐츠를 maxWidth + margin auto로 중앙 정렬
-        → padding-left 고정값 대신 내부에 wrapper를 씌워 자연스럽게 가운데 정렬
 ═══════════════════════════════════════════ */
 function Hero() {
   const competencies = [
     { icon: "🤖", label: "RAG 시스템 설계", sub: "Amazon Bedrock · OpenSearch" },
-    { icon: "⚡", label: "On-Device AI", sub: "Snapdragon NPU · 파라미터 튜닝" },
+    { icon: "⚡", label: "On-Device AI 최적화", sub: "TFLite · ONNX · NPU 튜닝" },
     { icon: "✍️", label: "Prompt Engineering", sub: "품질 측정 · 편차 개선" },
     { icon: "☁️", label: "AWS 클라우드", sub: "S3 · Lambda · Bedrock" },
     { icon: "🔍", label: "이슈 트래킹", sub: "4단계 체계 · 리스크 차단" },
@@ -357,21 +358,16 @@ function Hero() {
 
   return (
     <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", fontFamily: FF }}>
-      {/* ── 왼쪽: 흰 배경
-          핵심 수정: padding을 좌우 동일하게 주고, 내부 콘텐츠를 maxWidth로 묶어
-          어느 화면 너비에서도 치우치지 않도록 함 */}
       <div style={{
         background: "#fff",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",          /* 가로 중앙 */
-        padding: "100px 40px 64px",    /* 좌우 동일 패딩 */
+        alignItems: "center",
+        padding: "100px 40px 64px",
         borderRight: "1px solid #f1f5f9",
       }}>
-        {/* 실제 콘텐츠 wrapper — 너비 고정으로 왼쪽 정렬 유지하되 컨테이너가 중앙 */}
         <div style={{ width: "100%", maxWidth: 340 }}>
-          {/* 증명사진 */}
           <div style={{
             width: 200, height: 252, borderRadius: 18, overflow: "hidden",
             background: "#f1f5f9", border: "1px solid #e2e8f0", marginBottom: 28, flexShrink: 0,
@@ -380,22 +376,11 @@ function Hero() {
               style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
 
-          {/* 직군 뱃지 */}
-          <div style={{
-            display: "inline-block", width: "fit-content", marginBottom: 14,
-            fontSize: 13, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.05em",
-            color: ACCENT, background: "#eef2ff", border: "1px solid #c7d2fe",
-            borderRadius: 99, padding: "7px 18px",
-          }}>
-            {ROLE}
-          </div>
-
-          {/* 이름 */}
-          <h1 style={{ fontSize: 56, fontWeight: 800, color: "#0f172a", margin: "0 0 28px", letterSpacing: "-2px", lineHeight: 1.05 }}>
-            {NAME}
+          <h1 style={{ margin: "0 0 28px", lineHeight: 1.2 }}>
+            <span style={{ fontSize: 28, fontWeight: 700, color: "#0f172a", letterSpacing: "-0.5px", display: "block", marginBottom: 8 }}>안녕하세요</span>
+            <span style={{ display: "block" }}><span style={{ fontSize: 64, fontWeight: 800, color: "#4f7bff", letterSpacing: "-2px" }}>강민서</span><span style={{ fontSize: 36, fontWeight: 700, color: "#0f172a", letterSpacing: "-1px" }}>입니다</span></span>
           </h1>
 
-          {/* 신상정보 */}
           <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 40 }}>
             {[
               { icon: "🎂", label: "나이", val: AGE },
@@ -422,7 +407,6 @@ function Hero() {
             ))}
           </div>
 
-          {/* CTA */}
           <div style={{ display: "flex", gap: 10 }}>
             <button onClick={() => scrollTo("projects")} style={{
               background: ACCENT, color: "#fff", border: "none", cursor: "pointer",
@@ -441,7 +425,6 @@ function Hero() {
         </div>
       </div>
 
-      {/* 오른쪽: 다크 배경 + 역량 카드 */}
       <div style={{
         background: "linear-gradient(135deg, #060b18 0%, #0d1535 25%, #1e1b4b 55%, #0f172a 80%, #020408 100%)",
         display: "flex", flexDirection: "column", justifyContent: "center",
@@ -647,12 +630,23 @@ function Skills() {
 
 /* ═══════════════════════════════════════════
    PROJECT CARD
-   FIX: 좌우 패딩 완전 통일(32px), 배경색 통일(#fff),
-        구분선만 borderLeft로 유지
 ═══════════════════════════════════════════ */
 function ProjectCard({ proj }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div id={`project-${proj.num}`} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 20, overflow: "hidden" }}>
+    <div
+      id={`project-${proj.num}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: "#fff",
+        border: `1px solid ${hovered ? "#a5b4fc" : "#e2e8f0"}`,
+        borderRadius: 20, overflow: "hidden",
+        boxShadow: hovered ? "0 8px 32px rgba(79,123,255,0.10)" : "0 1px 4px rgba(0,0,0,0.04)",
+        transform: hovered ? "translateY(-4px)" : "none",
+        transition: "all 0.25s ease",
+      }}
+    >
       <div style={{ padding: "32px 36px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
           <span style={{ fontSize: 24, fontWeight: 700, color: "#64748b", fontFamily: MONO, letterSpacing: "-1px" }}>#{proj.num}</span>
@@ -679,14 +673,7 @@ function ProjectCard({ proj }) {
         </div>
       </div>
 
-      {/* ── 주요기여 / STAR 영역
-          핵심 수정:
-          - 양쪽 padding 모두 "32px" 로 통일
-          - 왼쪽 background를 "#fff" 로 통일 (기존 #fafbfc 제거)
-          - 구분은 borderLeft 만으로 처리
-          - 카드 전체 배경이 #fff 이므로 시각적으로 균일하게 보임 */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "1px solid #e2e8f0" }}>
-        {/* 왼쪽: 주요 기여 */}
         <div style={{ padding: "28px 32px", background: "#fff" }}>
           <p style={{ margin: "0 0 14px", fontSize: 10, fontFamily: MONO, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3b8" }}>주요 기여</p>
           {proj.bullets.map((b, i) => (
@@ -696,7 +683,6 @@ function ProjectCard({ proj }) {
             </div>
           ))}
         </div>
-        {/* 오른쪽: STAR */}
         <div style={{ padding: "28px 32px", background: "#f8fafc", borderLeft: "1px solid #e2e8f0", display: "flex", flexDirection: "column", gap: 12 }}>
           {proj.star.map((s) => (
             <div key={s.label} style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: "14px 16px", flex: 1 }}>
